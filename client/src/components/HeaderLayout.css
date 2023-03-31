@@ -1,0 +1,15 @@
+.Title-App {
+    text-align: center;
+    background-color: #4E7BBE;
+    display: block;
+    margin-top: 0;
+    top: 1px;
+}
+
+.header {
+    background-color: #A6C6F5;
+}
+
+.onglet-menu {
+    display: inline;
+}

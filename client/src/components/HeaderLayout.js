@@ -8,9 +8,9 @@ const HeaderLayout = () => {
   const navigate=useNavigate();
 
   const items = [
-    {id: 0, label: 'Prepare Session', command: () => navigate("/"), path: '/', className: "onglet-menu"},
-    {id: 1, label: 'History', command: () => navigate("/history"), path: '/history', className: "onglet-menu"},
-    {id: 2, label: 'Dashboard', command: () => navigate("/dashboard"), path: '/dashboard', className: "onglet-menu"}
+    {id: 0, label: 'Prepare Session', command: () => navigate("/"), path: '/'},
+    {id: 1, label: 'History', command: () => navigate("/history"), path: '/history'},
+    {id: 2, label: 'Dashboard', command: () => navigate("/dashboard"), path: '/dashboard'}
   ]
 
   function computeUrl() {

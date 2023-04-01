@@ -20,7 +20,6 @@ const App = () => {
           <Route index element={<PrepareSessionLayout />} />
           <Route path="history" element={<HistorySessionLayout />} />
           <Route path="dashboard" element={<DashboardLayout />} />
-
           {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
                 routes for. */}

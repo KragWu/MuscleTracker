@@ -25,22 +25,19 @@ const HeaderLayout = () => {
   }
 
   return (
-    <div>
-      <div className="header">
+    <>
+      <div>
         <div className="Title-App">
-          <h1>Muscle Tracker</h1>
+          <h1 className="Title-App" >Muscle Tracker</h1>
         </div>
-        <div className="card">
-          <TabMenu model={items} activeIndex={computeUrl()} />
-        </div>
-        <hr />
+        <TabMenu model={items} activeIndex={computeUrl()} />
       </div>
 
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}
       <Outlet />
-    </div>
+    </>
   );
 }
 

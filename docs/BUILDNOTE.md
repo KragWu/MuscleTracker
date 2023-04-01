@@ -20,3 +20,29 @@ To add Linter in React Project, I use these documentations:
  - https://stackoverflow.com/questions/72780296/warning-react-version-not-specified-in-eslint-plugin-react-settings-while-run (Fix bug ESLint no detect React version)
  - https://blog.logrocket.com/12-essential-eslint-rules-react/ (Guide)
  - https://eslint.org/docs/latest/use/getting-started (Official Doc)
+
+## Step 4: Add StoryBook (Not Mandatory)
+
+To add Storybook in this project that no used `create-react-app`, I used this documentation: 
+- https://www.bam.tech/article/use-storybook-react-project
+
+## Step 5: Add Material
+
+To add most popular UI framework, I used this documentation: 
+- https://mui.com/material-ui/getting-started/installation/ (Official Doc)
+
+## Step 5(bis): Add PrimeReact
+
+To add most popular UI framework with charts, I used this documentation: 
+- https://primereact.org/ (Official Doc)
+
+## Step 6: Add Router
+
+To add router in this project, I used this documentation: 
+- https://reactrouter.com/en/main (Official Doc)
+- https://github.com/remix-run/react-router/tree/dev/examples/basic/src (Basic Example)
+
+To fix the routing problem, when we write url in browser, I used this documentation: 
+- https://ui.dev/react-router-cannot-get-url-refresh
+- https://www.copycat.dev/blog/react-router-redirect/
+

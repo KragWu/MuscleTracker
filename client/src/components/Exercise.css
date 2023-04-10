@@ -1,0 +1,32 @@
+.exercise {
+    display: inline-block;
+    width: 100%;
+}
+
+.selection {
+    display: inline-block;
+    width: 10%;
+}
+
+.name {
+    display: inline-block;
+    width: 25%;
+}
+
+.muscle {
+    display: inline-block;
+    width: 25%;
+}
+
+.muscle-icon {
+    margin-right: 5px;
+}
+
+.tools {
+    display: inline-block;
+    width: 25%;
+}
+
+.tools-icon {
+    margin-right: 5px;
+}

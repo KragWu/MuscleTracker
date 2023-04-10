@@ -15,6 +15,10 @@
     width: 100%;
 }
 
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem {
+    width: 100% !important;
+}
+
 .p-tabmenuitem.p-highlight .p-menuitem-link {
     border-color: #6366F1 #6366F1 #6366F1 #6366F1 !important;
 }
@@ -40,3 +44,4 @@
 .p-menuitem-text {
     color: white;
 }
+

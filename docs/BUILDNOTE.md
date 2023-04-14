@@ -46,3 +46,98 @@ To fix the routing problem, when we write url in browser, I used this documentat
 - https://ui.dev/react-router-cannot-get-url-refresh
 - https://www.copycat.dev/blog/react-router-redirect/
 
+## Step 7: Share data between Components
+
+In your Parent Component, you define a state to share between 2 Child Component 
+and a handler (no forget to bind your handler).
+
+```
+class Parent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handler = this.handler.bind(this)
+        this.state = {
+            dataToShare: []
+        }
+    }
+
+    handler(data) {
+        this.setState({dataToShare: data})
+    }
+
+    render () {
+        return <></>
+    }
+}
+```
+
+Then you create the Emitter Component, with a state and a handler too.
+And in the handler, you update the state with the `setState` method and you send the result in the callback closure of the `setState` method.
+
+```
+export default class ChildOne extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handler = this.handler.bind(this)
+        this.state = {
+            dataToTransmit: this.props.dataParent
+        }
+    }
+
+    handler(newdata) {
+        this.setState({dataToTransmit: newdata}, () => {
+            this.props.onChangeFromParent(this.state.dataToTransmit)
+        })
+    }
+
+    render () {
+        return <>
+            <InputComponent onChange={this.handler}>
+        </>
+    }
+}
+```
+
+In the Second Child Component, you create just a state which recieve the data.
+
+```
+export default class ChildTwo extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataRecieved: this.props.dataRecieved
+        }
+    }
+
+    render () {
+        return <>
+            {this.props.dataRecieved}
+        </>
+    }
+}
+```
+
+And now, in the Parent Component, we called the 2 Children
+
+```
+class Parent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handler = this.handler.bind(this)
+        this.state = {
+            dataToShare: []
+        }
+    }
+
+    handler(data) {
+        this.setState({dataToShare: data})
+    }
+
+    render () {
+        return <>
+            <ChildOne dataParent={dataToShare} onChangeFromParent={this.handler}>
+            <ChildTwo dataRecieved={dataToShare}>
+        </>
+    }
+}
+```

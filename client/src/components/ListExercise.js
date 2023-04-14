@@ -10,31 +10,27 @@ class listExercise extends React.Component {
             listChoice: props.exoChoice,
             goal: props.goal
         }
+        this._switchBalise = this._switchBalise.bind(this)
+        this.handleSelectExercise = this.handleSelectExercise.bind(this)
+    }
+
+    handleSelectExercise(listSelectExo) {
+        this.setState({listChoice: listSelectExo}, () => {
+            this.props.onSelectExo(listSelectExo)
+        })
     }
 
     _switchBalise(goal, listExo, listChoice) {
         var result = null
         switch (goal) {
             case 'Presentation': 
-                result = listExo.map(item => {
-                    return <div key={item.id_name}>
-                        <ExercisePresented exo={item} listExercise={listExo} listChoice={listChoice} />
-                    </div>
-                })
+                result = <ExercisePresented listExercise={listExo} listChoice={listChoice} onChoiceExo={this.handleSelectExercise} />
                 break;
             case 'Validation': 
-                result = listChoice.map(item => {
-                    return <div key={item.id_name}>
-                        <ExerciseChoice exo={item} listExercise={listExo} listChoice={listChoice} />
-                    </div>
-                })
+                result = <ExerciseChoice listChoice={listChoice} />
                 break;
             default: 
-                result = listExo.map(item => {
-                    return <div key={item.id_name}>
-                        <ExercisePresented exo={item} listExercise={listExo} listChoice={listChoice} />
-                    </div>
-                })
+                result = <ExercisePresented listExercise={listExo} listChoice={listChoice} onChoiceExo={this.handleSelectExercise} />
                 break;
         }
         return result

@@ -1,69 +1,31 @@
 import React from "react";
 import "./Exercise.css"
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 export default class ExercisePresented extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            exo: props.exo,
             listExercise: props.listExercise,
             listChoice: props.listChoice,
         }
+        this.handleChoice = this.handleChoice.bind(this)
     }
 
-    muscleIcon(muscle) {
-        return <>
-        {
-            muscle.map(elem => {
-                return <label key={elem} className="muscle-icon">{elem}</label>
-            })
-        }
-        </>
-    }
-
-    toolsIcon(tools) {
-        return <>
-        {
-            tools.map(elem => {
-                return <label key={elem} className="tools-icon">{elem}</label>
-            })
-        }
-        </>
-    }
-
-    selectExercise(listExercice, exoSelected, listChoice, event) {
-        const element = event.currentTarget
-        if (element.checked) {
-            listExercice.forEach(elem => {
-                if (elem.name == exoSelected) {
-                    listChoice.push(elem)
-                    let index = listChoice.indexOf(elem)
-                    let test = listChoice.at(index)
-                    console.log("push : elem : " + elem.name + " - index : " + index + " - test : " + test.name)
-                }
-            });
-        } else {
-            listChoice.forEach(elem => {
-                if(elem.name == exoSelected) {
-                    let index = listChoice.indexOf(elem)
-                    let test = listChoice.at(index)
-                    console.log("pop: elem : " + elem.name + " - index : " + index + " - test : " + test.name)
-                    listChoice.splice(index, 1)
-                }
-            });
-        }
-        console.log(listChoice)
+    handleChoice(e) {
+        this.setState({listChoice: e.value}, () => {
+            this.props.onChoiceExo(this.state.listChoice)
+        })
     }
 
     render() {
-        const exercise = this.props.exo
-        const listExercise = this.props.listExercise
-        const listChoice = this.props.listChoice
-        return <div className="exercise">
-            <div className="selection"><input id={exercise.id_name} type="checkbox" onClick={(e) => this.selectExercise(listExercise, exercise.name, listChoice, e)}/></div>
-            <div className="name">{exercise.name}</div>
-            <div className="muscle">{this.muscleIcon(exercise.muscle)}</div>
-            <div className="tools">{this.toolsIcon(exercise.tools)}</div>
-        </div>
+        return <DataTable value={this.state.listExercise} selectionMode={'multiple'} selection={this.state.listChoice} 
+        onSelectionChange={(e) => this.handleChoice(e)} dataKey="id_name" tableStyle={{ minWidth: '10rem' }}>
+            <Column selectionMode="multiple" className="p-selection-column" ></Column>
+            <Column field="name" header="Nom" className="p-selection-column" ></Column>
+            <Column field="muscle" header="Muscle" className="p-selection-column" ></Column>
+            <Column field="tools" header="Equipement" className="p-selection-column" ></Column>
+        </DataTable>
     }
 }

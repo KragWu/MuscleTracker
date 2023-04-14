@@ -1,20 +1,18 @@
 import React from "react";
+import "./Exercise.css"
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 export default class ExerciseChoice extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            exo: props.exo,
-        }
     }
 
     render() {
-        const exercise = this.props.exo
-        return <div>
-            <div className="name">{exercise.name}</div>
-            <div className="mediumWeight">{exercise.mediumWeight}</div>
-            <div className="maxWeight">{exercise.maxWeight}</div>
-            <div className="averageRepetition">{exercise.averageRepetition}</div>
-        </div>
+        return <DataTable value={this.props.listChoice} dataKey="id_name" tableStyle={{ minWidth: '10rem' }}>
+            <Column field="name" header="Nom" className="p-selection-column" ></Column>
+            <Column field="muscle" header="Muscle" className="p-selection-column" ></Column>
+            <Column field="tools" header="Equipement" className="p-selection-column" ></Column>
+        </DataTable>
     }
 }

@@ -30,3 +30,15 @@
 .tools-icon {
     margin-right: 5px;
 }
+
+.p-selection-column {
+    width: 50px !important;
+    text-overflow:ellipsis; 
+    overflow: hidden;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+
+.pi-check::before {
+    content: "\2713" !important;
+}

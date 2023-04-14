@@ -70,24 +70,10 @@
         "id_name_bis": ""
     },
     {
-        "name": "Rowing à la barre",
-        "tools": ["Barre"],
-        "muscle": ["Dos"],
-        "id_name": "rowbar",
-        "id_name_bis": ""
-    },
-    {
         "name": "Rowing à l'haltère",
         "tools": ["Banc", "Haltère"],
         "muscle": ["Dos"],
         "id_name": "rowhalt",
-        "id_name_bis": ""
-    },
-    {
-        "name": "Pullover",
-        "tools": ["Banc", "Haltère"],
-        "muscle": ["Dos"],
-        "id_name": "pullover",
         "id_name_bis": ""
     },
     {
@@ -123,13 +109,6 @@
         "tools": ["Haltère"],
         "muscle": ["Epaules"],
         "id_name": "elevlat",
-        "id_name_bis": ""
-    },
-    {
-        "name": "Elévation frontal",
-        "tools": ["Haltère"],
-        "muscle": ["Epaules"],
-        "id_name": "elevfront",
         "id_name_bis": ""
     },
     {

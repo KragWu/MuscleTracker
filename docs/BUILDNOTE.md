@@ -141,3 +141,80 @@ class Parent extends React.Component {
     }
 }
 ```
+
+## Step 8: Fix the encoding showing
+
+To show a checkmark, we do select the concerned element HTML and modify the content like that: 
+```
+.pi-check::before {
+    content: "\2713" !important;
+}
+```
+We use this documentation to find the right code: 
+https://outils-javascript.aliasdmc.fr/encodage-caracteres-formulaire/encode-caractere-2713-html-css-js-autre.html
+
+## Step 9: Search the icons
+
+To find the free icons, we use these websites: 
+- https://www.flaticon.com/packs/human-body-parts/2
+- https://fr.freepik.com/icones-gratuites
+
+## Step 10: Add image in table
+
+Start to import the wanted picture to inject, like this : 
+```
+import nameVarContentPicture from "./assests/wantedPicture.png"
+```
+
+To add the picture in DOM Element, we create a new DOM Element that contains the same values except the label replaced by picture.
+
+```
+var newElement = <div id={oldElement.id}>
+    {
+        <img src={nameVarContentPicture} alt={oldElement.labelToReplaceByImage} title={oldElement.labelToReplaceByImage} />
+    }
+</>
+```
+
+For our case, we replaced a list of labels, we can do the same implement, in applying the method `map` on the list, like this:
+
+```
+var newElement = <div id={oldElement.id}>
+    {
+        oldElement.labelsToReplaceByImage.map(labelToReplaceByImage => {
+            switch (labelToReplaceByImage) {
+                case "toto": 
+                    return <img src={nameVarContentPictureToto} alt={oldElement.labelToReplaceByImage} title={oldElement.labelToReplaceByImage} />
+                case "tata":
+                    return <img src={nameVarContentPictureTata} alt={oldElement.labelToReplaceByImage} title={oldElement.labelToReplaceByImage} />
+                default:
+                    break;
+            }
+        })
+    }
+</>
+```
+
+## Step 11: Fix found errors by ESLinter
+
+To fix the linter error of react/prop-types, we add this in each asked class: 
+```
+import PropTypes from 'prop-types'
+
+export default class Example extends React.Component {
+    static propTypes = {
+        variable: PropTypes.string.isRequired,
+        listVariable: PropTypes.array.isRequired,
+        onFunc: PropTypes.func
+    }
+}
+```
+
+To fix the linter error of the function `require` is not defined, we need to add this line in eslint config:
+```
+module.exports = {
+    "env": {
+        "node": true
+    },
+}
+```

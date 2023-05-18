@@ -210,6 +210,8 @@ export default class Example extends React.Component {
 }
 ```
 
+You can read this documentation: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+
 To fix the linter error of the function `require` is not defined, we need to add this line in eslint config:
 ```
 module.exports = {

@@ -42,3 +42,9 @@
 .pi-check::before {
     content: "\2713" !important;
 }
+
+img {
+    width: 30px;
+    margin-left: 2px;
+    margin-right: 2px;
+}

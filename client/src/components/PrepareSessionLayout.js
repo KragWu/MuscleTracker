@@ -20,15 +20,15 @@ class PrepareSessionLayout extends React.Component {
         const listChoice = this.state.listChoice
         return <>
             <div>
-                <h2>Liste d'exercices</h2>
+                <h2>Liste d&apos;exercices</h2>
                 <ListExercise listExo={listExo} goal="Presentation" exoChoice={listChoice} onSelectExo={this.handleChoiceExercises} />
             </div>
             <div>
-                <h2>Choix d'exercices pour la session</h2>
+                <h2>Choix d&apos;exercices pour la session</h2>
                 <ListExercise listExo={listChoice} goal="Validation" exoChoice={listChoice}/>
             </div>
         </>
     }
-};
+}
 
 export default PrepareSessionLayout;

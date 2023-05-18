@@ -2,8 +2,12 @@ import React from "react";
 import "./Exercise.css"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import PropTypes from 'prop-types'
 
 export default class ExerciseChoice extends React.Component {
+    static propTypes = {
+        listChoice: PropTypes.array.isRequired
+    }
     constructor(props) {
         super(props)
     }

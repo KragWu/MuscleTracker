@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types'
 
 export default class ExerciseSession extends React.Component {
+    static propTypes = {
+        exo: PropTypes.string.isRequired
+    }
     constructor(props) {
         super(props)
         this.state = {

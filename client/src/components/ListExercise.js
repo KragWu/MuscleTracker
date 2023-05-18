@@ -1,8 +1,15 @@
 import React from "react";
 import ExerciseChoice from "./ExerciseChoice";
 import ExercisePresented from "./ExercisePresented";
+import PropTypes from 'prop-types'
 
 class listExercise extends React.Component {
+    static propTypes = {
+        listExo: PropTypes.array.isRequired,
+        exoChoice: PropTypes.array.isRequired,
+        goal: PropTypes.string.isRequired,
+        onSelectExo: PropTypes.func
+    }
     constructor(props) {
         super(props)
         this.state = {
@@ -23,10 +30,10 @@ class listExercise extends React.Component {
     _switchBalise(goal, listExo, listChoice) {
         var result = null
         switch (goal) {
-            case 'Presentation': 
+            case "Presentation": 
                 result = <ExercisePresented listExercise={listExo} listChoice={listChoice} onChoiceExo={this.handleSelectExercise} />
                 break;
-            case 'Validation': 
+            case "Validation": 
                 result = <ExerciseChoice listChoice={listChoice} />
                 break;
             default: 

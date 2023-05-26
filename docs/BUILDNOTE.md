@@ -220,3 +220,14 @@ module.exports = {
     },
 }
 ```
+
+## Step 12: Write unit tests with Jest
+
+I use this documentation to install and write my first test:
+https://jestjs.io/docs/getting-started (Official documentation)
+
+And I use this information to configure the linter with Jest:
+https://stackoverflow.com/questions/31629389/how-to-use-eslint-with-jest (Question StackOverflow)
+
+To fix my unit test that compare image, I use this answer read here: 
+https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test (Question StackOverflow)

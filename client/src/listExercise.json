@@ -1,0 +1,156 @@
+[
+    {
+        "name": "Développé couché",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux", "Epaules"],
+        "id_name": "devcou",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé couché centré",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux", "Epaules"],
+        "id_name": "devcoucen",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé incliné",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux"],
+        "id_name": "devinc",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé incliné centré",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux"],
+        "id_name": "devinccen",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé décliné",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux"],
+        "id_name": "devdec",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé décliné centré",
+        "tools": ["Banc", "Barre"],
+        "muscle": ["Pectoraux"],
+        "id_name": "devdeccen",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Ecartés haltère",
+        "tools": ["Banc", "Haltère"],
+        "muscle": ["Pectoraux"],
+        "id_name": "ecarte",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Pompes",
+        "tools": ["Aucun"],
+        "muscle": ["Global"],
+        "id_name": "pompes",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Traction",
+        "tools": ["Elastic"],
+        "muscle": ["Dos"],
+        "id_name": "traction",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Soulevé de terre",
+        "tools": ["Barre"],
+        "muscle": ["Dos"],
+        "id_name": "souleve",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Rowing à l'haltère",
+        "tools": ["Banc", "Haltère"],
+        "muscle": ["Dos"],
+        "id_name": "rowhalt",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Curls à la barre",
+        "tools": ["Barre"],
+        "muscle": ["Biceps"],
+        "id_name": "curlsbarre",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Curls aux haltères",
+        "tools": ["Haltère"],
+        "muscle": ["Biceps"],
+        "id_name": "curlshalte",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Kickback",
+        "tools": ["Banc", "Haltère"],
+        "muscle": ["Triceps"],
+        "id_name": "kickback",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Développé militaire",
+        "tools": ["Barre"],
+        "muscle": ["Epaules"],
+        "id_name": "devmil",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Elévation latérale",
+        "tools": ["Haltère"],
+        "muscle": ["Epaules"],
+        "id_name": "elevlat",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Crunch",
+        "tools": ["Aucun"],
+        "muscle": ["Abdos"],
+        "id_name": "crunch",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Squat",
+        "tools": ["Barre"],
+        "muscle": ["Quadriceps"],
+        "id_name": "squat",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Leg curl",
+        "tools": ["Banc"],
+        "muscle": ["Quadriceps", "Ischios"],
+        "id_name": "legcurl",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Fentes",
+        "tools": ["Haltère"],
+        "muscle": ["Ischios"],
+        "id_name": "fente",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Curls en proganation",
+        "tools": ["Banc", "Haltère"],
+        "muscle": ["Avant-Bras"],
+        "id_name": "curlsprog",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Curls en supination",
+        "tools": ["Banc", "Haltère"],
+        "muscle": ["Avant-Bras"],
+        "id_name": "curlssupi",
+        "id_name_bis": ""
+    }
+]

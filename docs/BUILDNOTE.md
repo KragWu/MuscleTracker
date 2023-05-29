@@ -231,3 +231,38 @@ https://stackoverflow.com/questions/31629389/how-to-use-eslint-with-jest (Questi
 
 To fix my unit test that compare image, I use this answer read here: 
 https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test (Question StackOverflow)
+
+## Step 13: Pass data between Two Components
+
+### Solution 1: Use Navigate or useNavigate by `react-router-dom`
+
+
+https://reactrouter.com/en/main/components/navigate (Official Doc)
+https://stackoverflow.com/questions/72379695/how-to-navigate-to-another-component-and-pass-data (Question StackOverflow)
+https://stackoverflow.com/questions/42173786/react-router-pass-data-when-navigating-programmatically (Long Question StackOverflow)
+
+**NOTE:** Use for serialize data
+
+### Solution 2: Use Link by `react-router-dom`
+
+
+https://stackoverflow.com/questions/31168014/pass-object-through-link-in-react-router (Question StackOverflow)
+
+**NOTE:** Use for serialize data
+
+### Solution 3: Use sessionStorage
+
+
+https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage (Official Doc)
+https://contactmentor.com/session-storage-react-js/ (Blog)
+
+### Solution 4: Use architecture MVC (Model-View-Controller)
+
+
+https://www.freakyjolly.com/react-how-to-create-services-and-consume-in-components-with-examples/ (Blog)
+
+## Step 14: Use HTML Element
+
+I use this documentation to know the specific attributes usefull : 
+https://developer.mozilla.org/fr/docs/Web/HTML/Element (Official Doc)
+

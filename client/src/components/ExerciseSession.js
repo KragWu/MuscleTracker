@@ -1,23 +1,31 @@
 import React from "react";
 import PropTypes from 'prop-types'
+import { replaceTextByIcon } from './helpers/ImageDecorator.js'
 
 export default class ExerciseSession extends React.Component {
     static propTypes = {
-        exo: PropTypes.string.isRequired
+        listExo: PropTypes.array.isRequired
     }
     constructor(props) {
         super(props)
         this.state = {
-            exo: props.exo,
+            listExo: props.listExo,
         }
     }
 
     render() {
-        const exercise = this.props.exo
+        const listExo = replaceTextByIcon(this.state.listExo)
         return <div>
-            <div className="name">{exercise.name}</div>
-            <div className="weight"><input></input></div>
-            <div className="repetition"><input></input></div>
-        </div>
+            {
+                listExo.map(element => { 
+                    return <>
+                        <h4 className="name">{element.name}</h4>
+                        {element.tools}
+                        <div className="weight"><label>Poids: </label><input type="number" /></div>
+                        <div className="repetition"><label>Répétition: </label><input type="number" /></div>
+                        </>
+                    })
+                }
+            </div>
     }
 }

@@ -266,3 +266,10 @@ https://www.freakyjolly.com/react-how-to-create-services-and-consume-in-componen
 I use this documentation to know the specific attributes usefull : 
 https://developer.mozilla.org/fr/docs/Web/HTML/Element (Official Doc)
 
+## Step 15: Improve the usage of CSS
+
+I use this documentation to improve my usage of CSS: 
+https://speakerdeck.com/goetter/ah-tu-peux-faire-ca-en-css-maintenant
+This documentation found due to a Devoxx video by Raphael Goetter.
+
+

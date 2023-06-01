@@ -19,7 +19,7 @@ export default class ExerciseSession extends React.Component {
         return <div className="exercise">
             {
                 listExo.map(element => { 
-                    return <div key={element.name} >
+                    return <div key={element.name} className="exo" >
                         <div className="titleExoSession">
                             <h4 className="nameExoSession">{element.name}</h4>
                             {element.tools}
@@ -30,7 +30,9 @@ export default class ExerciseSession extends React.Component {
                             <div className="repetition">
                                 <label className="labelExercise">Répétition: </label><input className="inputExercise" type="number" /><button className="Plus5" >+5</button>
                             </div>
-                            <button className="validateMove">Add</button>
+                            <div className="validationExercise">
+                                <button className="validateMove">Add</button>
+                            </div>
                         </div>
                     })
                 }

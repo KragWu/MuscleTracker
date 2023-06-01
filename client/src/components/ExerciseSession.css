@@ -45,6 +45,18 @@ label {
     margin-left: 15px;
 }
 
+.validationExercise {
+    width: 100%;
+    display: grid;
+    place-content: center;
+}
+
 .validateMove {
     background-color: green;
+    width: 200px;
+}
+
+.exo {
+    display: grid;
+    place-content: center;
 }

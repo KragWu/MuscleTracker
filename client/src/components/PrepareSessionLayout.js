@@ -1,6 +1,7 @@
 import React from "react";
 import ListExercise from "./ListExercise";
 import { Navigate } from "react-router-dom";
+import "./PrepareSessionLayout.css"
 
 const listExo = require("../listExercise.json")
 

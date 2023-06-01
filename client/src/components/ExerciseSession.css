@@ -1,0 +1,50 @@
+/* Solution find thanks to https://speakerdeck.com/goetter/ah-tu-peux-faire-ca-en-css-maintenant?slide=59 */
+.exercise {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.titleExoSession {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+}
+
+.nameExoSession {
+    display: inline-block;
+    margin-left: 20px;
+    width: 60%;
+}
+
+.weight {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.repetition {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+.inputExercise {
+    width: 25% !important;
+}
+
+.Plus5 {
+    display: inline-block;
+    width: 30px;
+    margin-left: 15px;
+}
+
+.validateMove {
+    background-color: green;
+}

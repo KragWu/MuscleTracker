@@ -1,0 +1,12 @@
+button {
+    width: 95%;
+    margin-top: 5px;
+    height: 30px;
+    background-color: #A6C6F5;
+    color: white;
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import ListExercise from "./ListExercise";
 import { Navigate } from "react-router-dom";
+import { parseExerciseListToString } from "./helpers/ExerciseParser";
 import "./PrepareSessionLayout.css"
 
 const listExo = require("../listExercise.json")
@@ -24,20 +25,10 @@ class PrepareSessionLayout extends React.Component {
         const listChoice = this.state.listChoice
         console.log("Submit session : Size of listChoice = " + listChoice.length)
         if (listChoice.length != 0) {
-            const strListChoise = this.listExoToString(listChoice)
+            const strListChoise = parseExerciseListToString(listChoice)
             sessionStorage.setItem("listExoChoice", strListChoise)
             this.setState({submitted: true});
         }
-    }
-
-    listExoToString(listExo) {
-        let resultString = ""
-        listExo.forEach(element => {
-            console.log(element.name)
-            resultString = resultString + element.name + "-" + element.id_name + "/" 
-        });
-        console.log(resultString)
-        return resultString;
     }
 
     render() {

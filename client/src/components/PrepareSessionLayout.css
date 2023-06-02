@@ -1,7 +1,4 @@
 button {
-    width: 95%;
-    margin-top: 5px;
-    height: 30px;
     background-color: #A6C6F5;
     color: white;
     font-weight: bold;
@@ -9,4 +6,16 @@ button {
 
 h2 {
     text-align: center;
+}
+
+.centrage {
+    text-align: center;
+}
+
+.validateExo {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    height: 30px;
 }

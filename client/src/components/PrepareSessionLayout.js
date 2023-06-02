@@ -51,7 +51,9 @@ class PrepareSessionLayout extends React.Component {
             <div>
                 <h2>Choix d&apos;exercices pour la session</h2>
                 <ListExercise listExo={listChoice} goal="Validation" exoChoice={listChoice}/>
-                <button type="submit" value="Valider" onClick={this.handleSubmit}>Valider</button>
+                <div className="centrage">
+                    <button className="validateExo" type="submit" value="Valider" onClick={this.handleSubmit}>Valider</button>
+                </div>
             </div>
             {submitted && <Navigate to="/session" />}
         </>

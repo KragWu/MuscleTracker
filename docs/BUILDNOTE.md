@@ -272,4 +272,7 @@ I use this documentation to improve my usage of CSS:
 https://speakerdeck.com/goetter/ah-tu-peux-faire-ca-en-css-maintenant
 This documentation found due to a Devoxx video by Raphael Goetter.
 
+And the speaker created this website and company: 
+https://www.alsacreations.com/
+
 

@@ -2,6 +2,7 @@ import React from "react";
 import ExerciseChoice from "./ExerciseChoice";
 import ExercisePresented from "./ExercisePresented";
 import PropTypes from 'prop-types'
+import ExerciseSession from "./ExerciseSession";
 
 class listExercise extends React.Component {
     static propTypes = {
@@ -35,6 +36,9 @@ class listExercise extends React.Component {
                 break;
             case "Validation": 
                 result = <ExerciseChoice listChoice={listChoice} />
+                break;
+            case "Session": 
+                result = <ExerciseSession listExo={listExo} />
                 break;
             default: 
                 result = <ExercisePresented listExercise={listExo} listChoice={listChoice} onChoiceExo={this.handleSelectExercise} />

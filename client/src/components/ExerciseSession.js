@@ -1,23 +1,40 @@
 import React from "react";
 import PropTypes from 'prop-types'
+import { replaceTextByIcon } from './helpers/ImageDecorator.js'
 
 export default class ExerciseSession extends React.Component {
     static propTypes = {
-        exo: PropTypes.string.isRequired
+        listExo: PropTypes.array.isRequired
     }
     constructor(props) {
         super(props)
         this.state = {
-            exo: props.exo,
+            listExo: props.listExo,
         }
     }
 
     render() {
-        const exercise = this.props.exo
-        return <div>
-            <div className="name">{exercise.name}</div>
-            <div className="weight"><input></input></div>
-            <div className="repetition"><input></input></div>
-        </div>
+        const listExo = replaceTextByIcon(this.state.listExo)
+        return <div className="exercise">
+            {
+                listExo.map(element => { 
+                    return <div key={element.name} className="blockExo" >
+                        <div className="titleExoSession">
+                            <h4 className="nameExoSession">{element.name}</h4>
+                            {element.tools}
+                            </div>
+                            <div className="champsExoSession">
+                                <label className="labelExercise">Poids: </label><input className="inputExercise" type="number" /><button className="buttonPlus5" >+5</button>
+                            </div>
+                            <div className="champsExoSession">
+                                <label className="labelExercise">Répétition: </label><input className="inputExercise" type="number" /><button className="buttonPlus5" >+5</button>
+                            </div>
+                            <div className="validationExercise">
+                                <button className="buttonValidateMove">Add</button>
+                            </div>
+                        </div>
+                    })
+                }
+            </div>
     }
 }

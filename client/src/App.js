@@ -4,7 +4,8 @@ import HeaderLayout from "./components/HeaderLayout";
 import PrepareSessionLayout from "./components/PrepareSessionLayout";
 import HistorySessionLayout from "./components/HistorySessionLayout";
 import DashboardLayout from "./components/DashboardLayout";
-import "./App.css"
+import SessionLayout from "./components/SessionLayout";
+import "./Global.css"
 
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     
@@ -20,6 +21,7 @@ const App = () => {
           <Route index element={<PrepareSessionLayout />} />
           <Route path="history" element={<HistorySessionLayout />} />
           <Route path="dashboard" element={<DashboardLayout />} />
+          <Route path="session" element={<SessionLayout />} />
           {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
                 routes for. */}

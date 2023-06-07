@@ -1,5 +1,4 @@
 import React from "react";
-import "./Exercise.css"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import PropTypes from 'prop-types'

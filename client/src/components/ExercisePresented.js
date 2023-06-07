@@ -1,5 +1,4 @@
 import React from "react";
-import "./Exercise.css";
 import { DataTable } from 'primereact/datatable';
 import { replaceTextByIcon } from './helpers/ImageDecorator.js'
 import { Column } from 'primereact/column';

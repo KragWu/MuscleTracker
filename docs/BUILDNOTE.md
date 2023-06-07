@@ -236,35 +236,52 @@ https://stackoverflow.com/questions/46898638/importing-images-breaks-jest-test (
 
 ### Solution 1: Use Navigate or useNavigate by `react-router-dom`
 
-
+I used these documentations: 
 https://reactrouter.com/en/main/components/navigate (Official Doc)
 https://stackoverflow.com/questions/72379695/how-to-navigate-to-another-component-and-pass-data (Question StackOverflow)
 https://stackoverflow.com/questions/42173786/react-router-pass-data-when-navigating-programmatically (Long Question StackOverflow)
 
-**NOTE:** Use for serialize data
+When I try to use this solution with the state, I had a problem with the deserialization because my data is too complicated. 
+This solution is very usefull when the data to transmit is simple.
+Or we must make a serializer of our complicated data.
+
+**NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
 
 ### Solution 2: Use Link by `react-router-dom`
 
-
+I use this documentation:
 https://stackoverflow.com/questions/31168014/pass-object-through-link-in-react-router (Question StackOverflow)
 
-**NOTE:** Use for serialize data
+I try this solution to the same problem of serialization, but without success, 
+I think this solution is usefull to redirect in other website.
+
+**NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
 
 ### Solution 3: Use sessionStorage
 
-
+I use this documentation:
 https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage (Official Doc)
 https://contactmentor.com/session-storage-react-js/ (Blog)
 
+When I try this solution, I had the same problem of serialization, 
+so I created a serializer for my data. And I keep this solution because I was seduced.
+
+**NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
+
 ### Solution 4: Use architecture MVC (Model-View-Controller)
 
-
+I use this documentation:
 https://www.freakyjolly.com/react-how-to-create-services-and-consume-in-components-with-examples/ (Blog)
+
+I think this solution to answer at my serialization problem, but it is not the solution.
+But with the architecture, I think use that to implement a service to call my API.
 
 ## Step 14: Use HTML Element
 
 I use this documentation to know the specific attributes usefull : 
 https://developer.mozilla.org/fr/docs/Web/HTML/Element (Official Doc)
+
+**NOTE:** I use this documentation at this moment to force to write just number in inputs.
 
 ## Step 15: Improve the usage of CSS
 

@@ -2,7 +2,7 @@ import React from "react";
 import ListExercise from "./ListExercise";
 import { Navigate } from "react-router-dom";
 import { parseExerciseListToString } from "./helpers/ExerciseParser";
-import "./PrepareSessionLayout.css"
+import "../Global.css"
 
 const listExo = require("../listExercise.json")
 
@@ -43,7 +43,7 @@ class PrepareSessionLayout extends React.Component {
                 <h2>Choix d&apos;exercices pour la session</h2>
                 <ListExercise listExo={listChoice} goal="Validation" exoChoice={listChoice}/>
                 <div className="centrage">
-                    <button className="validateExo" type="submit" value="Valider" onClick={this.handleSubmit}>Valider</button>
+                    <button className="validateButton" type="submit" value="Valider" onClick={this.handleSubmit}>Valider</button>
                 </div>
             </div>
             {submitted && <Navigate to="/session" />}

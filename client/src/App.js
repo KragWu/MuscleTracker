@@ -5,7 +5,7 @@ import PrepareSessionLayout from "./components/PrepareSessionLayout";
 import HistorySessionLayout from "./components/HistorySessionLayout";
 import DashboardLayout from "./components/DashboardLayout";
 import SessionLayout from "./components/SessionLayout";
-import "./App.css"
+import "./Global.css"
 
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";     

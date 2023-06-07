@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import "./HeaderLayout.css"
 import {TabMenu} from 'primereact/tabmenu'
+import "../Global.css"
 
 const HeaderLayout = () => {
 
@@ -27,9 +27,7 @@ const HeaderLayout = () => {
   return (
     <>
       <div>
-        <div className="Title-App">
-          <h1 className="Title-App" >Muscle Tracker</h1>
-        </div>
+        <h1 className="Title-App centrage" >Muscle Tracker</h1>
         <TabMenu model={items} activeIndex={computeUrl()} />
       </div>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import ListExercise from "./ListExercise";
 import { parseExerciseStringToList } from "./helpers/ExerciseParser";
+import "../Global.css"
 
 class SessionLayout extends React.Component {
     constructor(props) {

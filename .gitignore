@@ -165,6 +165,12 @@ sketch
 .history
 .ionide
 
+.mvn
+.vscode
+.idea
+target
+*.iml
+
 # End of https://www.toptal.com/developers/gitignore/api/git,intellij,visualstudiocode,react
 
 # Test

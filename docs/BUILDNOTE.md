@@ -293,3 +293,30 @@ And the speaker created this website and company:
 https://www.alsacreations.com/
 
 
+## Step 16: Create API
+
+I use the Spring website: https://start.spring.io/
+Then to create my first controller, I use these documentations: 
+- https://spring.io/guides/tutorials/rest/ (Spring website Guide)
+- https://www.baeldung.com/spring-boot-run-maven-vs-executable-jar (Blog/Book)
+
+## Step 17: Execute the manually the Java Program
+
+I used this documentation: 
+https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (Maven Docs)
+
+## Step 18: Transmit an JSON object and return a Model object in HTTP Response
+
+I used these documentation: 
+- https://stackoverflow.com/questions/29313687/trying-to-use-spring-boot-rest-to-read-json-string-from-post (StackOverFlow)
+- https://stackoverflow.com/questions/28466207/could-not-find-acceptable-representation-using-spring-boot-starter-web (StackOverFlow)
+- https://stackoverflow.com/questions/49560795/spring-boot-failed-write-http-message-springframework-http-converter-httpme (StackOverFlow)
+These documentations permit to specify the header, produces and objects to used for the need.
+
+And I asked at ChatGPT, that it answer my problem can be resolved by add JsonSerialize annotation on object model, 
+the two JSON dependencies in POM, the constructor, getter and setter declared public.
+
+## Step 19: Fix my IDE with multi language porject
+
+I used this documentation:
+https://www.baeldung.com/java-declared-expected-package-error (Blog/Book)

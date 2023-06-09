@@ -98,7 +98,7 @@ export default class ChildOne extends React.Component {
 }
 ```
 
-In the Second Child Component, you create just a state which recieve the data.
+In the Second Child Component, you create just a state which receive the data.
 
 ```
 export default class ChildTwo extends React.Component {
@@ -212,7 +212,7 @@ export default class Example extends React.Component {
 
 You can read this documentation: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
 
-To fix the linter error of the function `require` is not defined, we need to add this line in eslint config:
+To fix the linter error of the function `require` is not defined, we need to add this line in Eslint config:
 ```
 module.exports = {
     "env": {
@@ -242,7 +242,7 @@ https://stackoverflow.com/questions/72379695/how-to-navigate-to-another-componen
 https://stackoverflow.com/questions/42173786/react-router-pass-data-when-navigating-programmatically (Long Question StackOverflow)
 
 When I try to use this solution with the state, I had a problem with the deserialization because my data is too complicated. 
-This solution is very usefull when the data to transmit is simple.
+This solution is very useful when the data to transmit is simple.
 Or we must make a serializer of our complicated data.
 
 **NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
@@ -253,7 +253,7 @@ I use this documentation:
 https://stackoverflow.com/questions/31168014/pass-object-through-link-in-react-router (Question StackOverflow)
 
 I try this solution to the same problem of serialization, but without success, 
-I think this solution is usefull to redirect in other website.
+I think this solution is useful to redirect in other website.
 
 **NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
 
@@ -278,7 +278,7 @@ But with the architecture, I think use that to implement a service to call my AP
 
 ## Step 14: Use HTML Element
 
-I use this documentation to know the specific attributes usefull : 
+I use this documentation to know the specific attributes useful: 
 https://developer.mozilla.org/fr/docs/Web/HTML/Element (Official Doc)
 
 **NOTE:** I use this documentation at this moment to force to write just number in inputs.
@@ -316,7 +316,7 @@ These documentations permit to specify the header, produces and objects to used 
 And I asked at ChatGPT, that it answer my problem can be resolved by add JsonSerialize annotation on object model, 
 the two JSON dependencies in POM, the constructor, getter and setter declared public.
 
-## Step 19: Fix my IDE with multi language porject
+## Step 19: Fix my IDE with multi language project
 
 I used this documentation:
 https://www.baeldung.com/java-declared-expected-package-error (Blog/Book)

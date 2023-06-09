@@ -320,3 +320,23 @@ the two JSON dependencies in POM, the constructor, getter and setter declared pu
 
 I used this documentation:
 https://www.baeldung.com/java-declared-expected-package-error (Blog/Book)
+
+## Step 20: Call REST API with React App
+
+I used this documentation:
+https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples (Blog)
+
+## Step 21: Fix the CORS Problem
+
+I use these documentations to fix my problem:
+- https://developer.mozilla.org/fr/docs/Web/HTTP/CORS/Errors/CORSMissingAllowOrigin?utm_source=devtools&utm_medium=firefox-cors-errors&utm_campaign=default (Official Doc that explain the problem)
+- https://stackoverflow.com/questions/70842496/react-post-request-to-java-spring-rest-api-cors-error (StackOverFlow)
+- https://www.stackhawk.com/blog/react-cors-guide-what-it-is-and-how-to-enable-it/ (Blog - purpose solution in JS)
+
+**NOTE:** Many people purpose to config `Access-Control-Allow-Origin` with `*`, it is not a solution.
+And I use ChatGPT, because I don't see the annotation @CrossOrigin in Java class on StackOverFlow whereas the annotation it was used in the answer ^^'.
+
+## Step 22: use handling event on button click
+
+I use this documentation:
+https://legacy.reactjs.org/docs/handling-events.html (Legacy Official Doc)

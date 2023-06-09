@@ -8,13 +8,15 @@ public class Movement {
     Integer repetition;
     Integer weight;
     String idSession;
+    boolean stored;
 
-    public Movement(String name, Integer repetition, Integer weight, String idSession) {
+    public Movement(String name, Integer repetition, Integer weight, String idSession, boolean stored) {
         super();
         this.name = name;
         this.weight = weight;
         this.repetition = repetition;
         this.idSession = idSession;
+        this.stored = stored;
     }
 
     public void setName(String name) {
@@ -45,11 +47,19 @@ public class Movement {
         return this.idSession;
     }
 
+    public void setStored(boolean stored) {
+        this.stored = stored;
+    }
+    public boolean getStored() {
+        return this.stored;
+    }
+
     @Override
     public String toString() {
         return "Movement(name = "+ this.name + 
             ",weight = "+ this.weight + 
             ",repetition = "+ this.repetition + 
-            ",idSession = "+ this.idSession + ")";
+            ",idSession = "+ this.idSession + 
+            ",stored = "+ this.stored + ")";
     }
 }

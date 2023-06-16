@@ -152,6 +152,10 @@ img {
     background-color: red;
 }
 
+.buttonGray {
+    background-color: gray;
+}
+
 .buttonSession {
     font-weight: 20px;
     height: 60px;

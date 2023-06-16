@@ -57,7 +57,7 @@ class SessionLayout extends React.Component {
                     {this.state.statusSession == "NOT_START" && <button id="buttonCancelSession" className="buttonSession buttonRed" onClick={() => this.cancelSession()}>&#10006;</button>}
                     {this.state.canceled && <Navigate to="/"/>}
                 </div>
-                <ListExercise listExo={listChoice} goal="Session" exoChoice={listChoice}/>
+                <ListExercise listExo={listChoice} goal="Session" exoChoice={listChoice} statusSession={this.state.statusSession} />
                 <h2>Liste d&apos;enregistrement de mouvements</h2>
             </div>
         </>

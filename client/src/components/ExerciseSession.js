@@ -6,13 +6,15 @@ import { storeMovement } from "../services/SessionService.js";
 export default class ExerciseSession extends React.Component {
     static propTypes = {
         listExo: PropTypes.array.isRequired,
-        idSession: PropTypes.string
+        idSession: PropTypes.string,
+        statusSession: PropTypes.string
     }
     constructor(props) {
         super(props)
         this.state = {
             listExo: props.listExo,
-            idSession: props.idSession
+            idSession: props.idSession,
+            statusSession: props.statusSession
         }
     }
 
@@ -40,6 +42,7 @@ export default class ExerciseSession extends React.Component {
 
     render() {
         const listExo = replaceTextByIcon(this.state.listExo)
+        const statusSession = this.props.statusSession
         return <div className="exercise">
             {
                 listExo.map(element => { 
@@ -55,7 +58,8 @@ export default class ExerciseSession extends React.Component {
                                 <label className="labelExercise">Répétition: </label><input className="inputExercise" type="number" /><button className="buttonPlus5" onClick={() => this.addFive("repetition", element)}>+5</button>
                             </div>
                             <div className="validationExercise">
-                                <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGreen" onClick={() => this.handleSubmit(element)}>Add</button>
+                                {statusSession != "STARTED" && <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGray" >Add</button>}
+                                {statusSession == "STARTED" && <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGreen" onClick={() => this.handleSubmit(element)}>Add</button>}
                             </div>
                         </div>
                     })

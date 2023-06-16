@@ -8,6 +8,7 @@ import { startSession } from "../services/SessionService";
 class SessionLayout extends React.Component {
     constructor(props) {
         super(props)
+        sessionStorage.removeItem("idSession")
         this.state = {
             listChoice: [],
             statusSession: "NOT_START",
@@ -22,6 +23,7 @@ class SessionLayout extends React.Component {
         if (this.state.idSession == undefined) {
             startSession().then((idSession) => {
                 this.setState({idSession: idSession})
+                sessionStorage.setItem("idSession", idSession)
                 this.setState({statusSession: "STARTED"})
             }, (reason) => {
                 console.log(reason)

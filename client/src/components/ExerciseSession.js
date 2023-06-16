@@ -13,7 +13,7 @@ export default class ExerciseSession extends React.Component {
         super(props)
         this.state = {
             listExo: props.listExo,
-            idSession: props.idSession,
+            idSession: undefined,
             statusSession: props.statusSession
         }
     }
@@ -36,13 +36,14 @@ export default class ExerciseSession extends React.Component {
         if (repetition == 0 || idSession == undefined) {
             console.log("Not call Session API because weight and repetition not validated")
         } else {
-            storeMovement(element.name, weight, repetition, element.id_name, "")
+            storeMovement(element.name, weight, repetition, element.id_name, idSession)
         }
     }
 
     render() {
         const listExo = replaceTextByIcon(this.state.listExo)
         const statusSession = this.props.statusSession
+        const idSession = sessionStorage.getItem("idSession")
         return <div className="exercise">
             {
                 listExo.map(element => { 
@@ -59,7 +60,7 @@ export default class ExerciseSession extends React.Component {
                             </div>
                             <div className="validationExercise">
                                 {statusSession != "STARTED" && <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGray" >Add</button>}
-                                {statusSession == "STARTED" && <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGreen" onClick={() => this.handleSubmit(element)}>Add</button>}
+                                {statusSession == "STARTED" && <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGreen" onClick={() => this.handleSubmit(element, idSession)}>Add</button>}
                             </div>
                         </div>
                     })

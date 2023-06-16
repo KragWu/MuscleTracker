@@ -1,6 +1,12 @@
 package fr.kragwu.muscletracker.sessionapi.controllers;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.UUIDGenerator;
 
 import fr.kragwu.muscletracker.sessionapi.dto.Movement;
 import fr.kragwu.muscletracker.sessionapi.dto.Session;
@@ -38,6 +46,12 @@ public class SessionController {
 
     @PostMapping(value = "/startsession")
     public ResponseEntity<String> startSession() {
-        return ResponseEntity.status(201).body("Start Session");
+        System.out.println("Start Session");
+        LocalDateTime dateCurrent = LocalDateTime.now();
+        String dateTimePattern = "ddMMyyyy-HHmmss";
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateTimePattern);
+        String idSession = dateCurrent.format(dateTimeFormatter);
+        System.out.println("Date Time Session : " + dateCurrent + " - idSession : " + idSession);
+        return ResponseEntity.status(201).body(idSession);
     }
 }

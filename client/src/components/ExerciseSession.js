@@ -6,16 +6,20 @@ import { storeMovement } from "../services/SessionService.js";
 export default class ExerciseSession extends React.Component {
     static propTypes = {
         listExo: PropTypes.array.isRequired,
+        listMovement: PropTypes.array,
         idSession: PropTypes.string,
-        statusSession: PropTypes.string
+        statusSession: PropTypes.string,
+        onAddMovement: PropTypes.func
     }
     constructor(props) {
         super(props)
         this.state = {
             listExo: props.listExo,
             idSession: undefined,
-            statusSession: props.statusSession
+            statusSession: props.statusSession,
+            listMovement: props.listMovement
         }
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     addFive(element, exercise) {
@@ -37,6 +41,18 @@ export default class ExerciseSession extends React.Component {
             console.log("Not call Session API because weight and repetition not validated")
         } else {
             storeMovement(element.name, weight, repetition, element.id_name, idSession)
+            var newListMovement = this.props.listMovement
+            element = {
+                "name": element.name,
+                "weight": weight,
+                "repetition": repetition,
+                "saved": true
+            }
+            console.log(newListMovement)
+            newListMovement.push(element)
+            console.log(newListMovement)
+            this.setState({listMovement: newListMovement}, 
+                () => this.props.onAddMovement(newListMovement))
         }
     }
 

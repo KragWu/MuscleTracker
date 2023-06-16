@@ -165,3 +165,32 @@ img {
     margin-right: 10px;
 }
 
+.block {
+    display: block;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.nameMove {
+    width: 50%;
+}
+
+.weightMove {
+    width: 20%;
+}
+
+.repetitionMove {
+    width: 20%;
+}
+
+.savedMove {
+    width: 10%;
+    color: green;
+}
+
+.notSavedMove {
+    width: 10%;
+    color: red;
+}

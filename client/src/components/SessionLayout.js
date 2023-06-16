@@ -4,6 +4,7 @@ import ListExercise from "./ListExercise";
 import { parseExerciseStringToList } from "./helpers/ExerciseParser";
 import "../Global.css"
 import { startSession } from "../services/SessionService";
+import ListMovement from "./ListMovement";
 
 class SessionLayout extends React.Component {
     constructor(props) {
@@ -11,11 +12,13 @@ class SessionLayout extends React.Component {
         sessionStorage.removeItem("idSession")
         this.state = {
             listChoice: [],
+            listMove: [],
             statusSession: "NOT_START",
             idSession: undefined,
             canceled: false,
             errorCallService: false
         }
+        this.addMovement = this.addMovement.bind(this)
     }
 
     startSession(idSession) {
@@ -46,6 +49,10 @@ class SessionLayout extends React.Component {
         this.setState({canceled: true})
     }
 
+    addMovement(listMovement) {
+        this.setState({listMove: listMovement})
+    }
+
     render() {
         const listChoice = parseExerciseStringToList(sessionStorage.getItem("listExoChoice"))
         const idSession = this.state.idSession
@@ -59,8 +66,10 @@ class SessionLayout extends React.Component {
                     {this.state.statusSession == "NOT_START" && <button id="buttonCancelSession" className="buttonSession buttonRed" onClick={() => this.cancelSession()}>&#10006;</button>}
                     {this.state.canceled && <Navigate to="/"/>}
                 </div>
-                <ListExercise listExo={listChoice} goal="Session" exoChoice={listChoice} statusSession={this.state.statusSession} />
+                <ListExercise listExo={listChoice} goal="Session" exoChoice={listChoice} statusSession={this.state.statusSession} listMovement={this.state.listMove} onAddMovement={this.addMovement}/>
+                <h2>Résumé global de session</h2>
                 <h2>Liste d&apos;enregistrement de mouvements</h2>
+                <ListMovement listMovement={this.state.listMove} />
             </div>
         </>
     }

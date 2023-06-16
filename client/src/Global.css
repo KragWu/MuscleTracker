@@ -136,12 +136,28 @@ img {
 }
 
 .buttonValidateMove {
-    background-color: green;
     width: 200px;
 }
 
 .blockExo {
     display: grid;
     place-content: center;
+}
+
+.buttonGreen {
+    background-color: green;
+}
+
+.buttonRed {
+    background-color: red;
+}
+
+.buttonSession {
+    font-weight: 20px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 

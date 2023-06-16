@@ -1,4 +1,4 @@
-async function callSessionService(name, weight, repetition, id_name, idSession) {
+async function storeMovement(name, weight, repetition, id_name, idSession) {
     const body = {
         "name": name,
         "weight": weight,
@@ -13,4 +13,15 @@ async function callSessionService(name, weight, repetition, id_name, idSession) 
     console.log(data)
 }
 
-export default callSessionService;
+async function startSession() {
+    const body = {}
+    console.log("call Session API with body = " + body)
+    // Can add userid in headers
+    const response = await fetch('http://localhost:8080/startsession', { method: 'POST', mode: "cors", body: body, headers: {'Content-Type': 'application/json'}});
+    console.log(response)
+    const data = await response.text()
+    console.log(data)
+    return data    
+}
+
+export {storeMovement, startSession}

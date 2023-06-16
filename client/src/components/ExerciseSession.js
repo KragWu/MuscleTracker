@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import { replaceTextByIcon } from './helpers/ImageDecorator.js'
-import callSessionService from "../services/SessionService.js";
+import { storeMovement } from "../services/SessionService.js";
 
 export default class ExerciseSession extends React.Component {
     static propTypes = {
-        listExo: PropTypes.array.isRequired
+        listExo: PropTypes.array.isRequired,
+        idSession: PropTypes.string
     }
     constructor(props) {
         super(props)
         this.state = {
             listExo: props.listExo,
+            idSession: props.idSession
         }
     }
 
@@ -32,7 +34,7 @@ export default class ExerciseSession extends React.Component {
         if (repetition == 0 || idSession == undefined) {
             console.log("Not call Session API because weight and repetition not validated")
         } else {
-            callSessionService(element.name, weight, repetition, element.id_name, "")
+            storeMovement(element.name, weight, repetition, element.id_name, "")
         }
     }
 
@@ -53,7 +55,7 @@ export default class ExerciseSession extends React.Component {
                                 <label className="labelExercise">Répétition: </label><input className="inputExercise" type="number" /><button className="buttonPlus5" onClick={() => this.addFive("repetition", element)}>+5</button>
                             </div>
                             <div className="validationExercise">
-                                <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove" onClick={() => this.handleSubmit(element)}>Add</button>
+                                <button id={"buttonValidateMove"+element.id_name} className="buttonValidateMove buttonGreen" onClick={() => this.handleSubmit(element)}>Add</button>
                             </div>
                         </div>
                     })

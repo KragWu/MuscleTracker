@@ -41,18 +41,34 @@ export default class ExerciseSession extends React.Component {
             console.log("Not call Session API because weight and repetition not validated")
         } else {
             storeMovement(element.name, weight, repetition, element.id_name, idSession)
-            var newListMovement = this.props.listMovement
-            element = {
-                "name": element.name,
-                "weight": weight,
-                "repetition": repetition,
-                "saved": true
-            }
-            console.log(newListMovement)
-            newListMovement.push(element)
-            console.log(newListMovement)
-            this.setState({listMovement: newListMovement}, 
-                () => this.props.onAddMovement(newListMovement))
+            .then(() => {
+                var newListMovement = this.props.listMovement
+                element = {
+                    "name": element.name,
+                    "weight": weight,
+                    "repetition": repetition,
+                    "saved": true
+                }
+                console.log(newListMovement)
+                newListMovement.push(element)
+                console.log(newListMovement)
+                this.setState({listMovement: newListMovement}, 
+                    () => this.props.onAddMovement(newListMovement))
+            }, (reason) => {
+                console.log(reason)
+                var newListMovement = this.props.listMovement
+                element = {
+                    "name": element.name,
+                    "weight": weight,
+                    "repetition": repetition,
+                    "saved": false
+                }
+                console.log(newListMovement)
+                newListMovement.push(element)
+                console.log(newListMovement)
+                this.setState({listMovement: newListMovement}, 
+                    () => this.props.onAddMovement(newListMovement))
+            })
         }
     }
 

@@ -29,6 +29,28 @@ img {
     text-align: center;
 }
 
+/** Login Layout **/
+
+.alleger {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.inscription {
+    background-color: #16A34A;
+}
+
+.connexion {
+    background-color: #4F46E5;
+}
+
+.buttonLogin {
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+}
+
+
 /** Header Layout **/
 .Title-App {
     background-color: #4E7BBE;

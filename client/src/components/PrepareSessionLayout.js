@@ -10,10 +10,15 @@ class PrepareSessionLayout extends React.Component {
     constructor(props) {
         super(props)
         sessionStorage.removeItem("listExoChoice")
+        let connected = false;
+        if (sessionStorage.getItem("userId") != undefined) {
+            connected = true;
+        }
         this.handleChoiceExercises = this.handleChoiceExercises.bind(this)
         this.state = {
             listChoice: [],
             submitted: false,
+            userConnected: connected,
         }
     }
 
@@ -34,7 +39,9 @@ class PrepareSessionLayout extends React.Component {
     render() {
         const listChoice = this.state.listChoice
         const submitted = this.state.submitted
+        const userConnected = this.state.userConnected
         return <>
+            {!userConnected && <Navigate to="/login" />}
             <div>
                 <h2>Liste d&apos;exercices</h2>
                 <ListExercise listExo={listExo} goal="Presentation" exoChoice={listChoice} onSelectExo={this.handleChoiceExercises} />

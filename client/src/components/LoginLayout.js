@@ -2,6 +2,7 @@ import React from "react";
 import { Divider } from 'primereact/divider';
 import "../Global.css"
 import { Navigate } from "react-router-dom";
+import { authorize, login } from "../services/UserService";
 
 class LoginLayout extends React.Component {
     constructor(props) {
@@ -13,8 +14,24 @@ class LoginLayout extends React.Component {
     }
 
     handleConnexion() {
-        sessionStorage.setItem("userId", "test");
-        this.setState({connected: true})
+        const username = document.getElementById("username").value
+        const password = document.getElementById("password").value
+        login(username, password).then((sessionResult) => {
+            console.log("login OK = " + sessionResult)
+            authorize(sessionResult.id, sessionResult.token).then(() => {
+                console.log("authorize OK")
+                sessionStorage.setItem("sessionId", sessionResult.id);
+                sessionStorage.setItem("sessionToken", sessionResult.token);
+                sessionStorage.setItem("userId", sessionResult.idUser);
+                this.setState({connected: true})
+            }, (reason) => {
+                console.log("authorize KO = " + reason)
+                this.setState({connected: false})
+            })
+        }, (reason) => {
+            console.log("login KO = " + reason)
+            this.setState({connected: false})
+        })
     }
 
     handleInscription() {

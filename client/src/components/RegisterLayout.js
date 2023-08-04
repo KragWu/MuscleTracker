@@ -1,18 +1,25 @@
 import React from "react";
 import "../Global.css"
 import { Navigate } from "react-router-dom";
+import { register } from "../services/UserService";
 
 class RegisterLayout extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            connected: false,
+            register: false,
         }
     }
 
-    handleConnexion() {
-        sessionStorage.setItem("userId", "test");
-        this.setState({connected: true})
+    handleInscription() {
+        const username = document.getElementById("username").value
+        const password = document.getElementById("password").value
+        register(username, password).then(() => {
+            this.setState({register: true})
+        }, (reason) => {
+            console.log("register KO = " + reason)
+            this.setState({register: false})
+        })
     }
 
     render() {
@@ -30,9 +37,9 @@ class RegisterLayout extends React.Component {
                 <br />
                 <input id="password" type="password" className="alleger"/>
                 <br />
-                <button className="connexion buttonLogin alleger" onClick={() => this.handleConnexion()} >Connexion</button>
+                <button className="connexion buttonLogin alleger" onClick={() => this.handleInscription()} >Enregistrer</button>
             </div>
-            {this.state.connected && <Navigate to="/prepare" />}
+            {this.state.register && <Navigate to="/login" />}
         </div>
     }
 }

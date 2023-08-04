@@ -15,6 +15,7 @@ import "primereact/resources/primereact.min.css";
 //icons
 import "primeicons/primeicons.css";                                         
 import RegisterLayout from "./components/RegisterLayout";
+import LogoutLayout from "./components/LogoutLayout";
          
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="history" element={<HistorySessionLayout />} />
           <Route path="dashboard" element={<DashboardLayout />} />
           <Route path="session" element={<SessionLayout />} />
+          <Route path="logout" element={<LogoutLayout />} />
           {/* Using path="*"" means "match anything", so this route
                 acts like a catch-all for URLs that we don't have explicit
                 routes for. */}

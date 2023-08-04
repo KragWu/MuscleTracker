@@ -1,8 +1,0 @@
-fr\kragwu\muscletracker\userapi\controllers\UserController.class
-fr\kragwu\muscletracker\userapi\UtilisateurApplication.class
-fr\kragwu\muscletracker\userapi\dto\Session.class
-fr\kragwu\muscletracker\userapi\utils\SessionJSONParser.class
-fr\kragwu\muscletracker\userapi\dto\User.class
-fr\kragwu\muscletracker\userapi\services\UserService.class
-fr\kragwu\muscletracker\userapi\dto\Registration.class
-fr\kragwu\muscletracker\userapi\utils\RegistrationJSONParser.class

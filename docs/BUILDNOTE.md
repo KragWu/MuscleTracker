@@ -98,7 +98,7 @@ export default class ChildOne extends React.Component {
 }
 ```
 
-In the Second Child Component, you create just a state which recieve the data.
+In the Second Child Component, you create just a state which receive the data.
 
 ```
 export default class ChildTwo extends React.Component {
@@ -212,7 +212,7 @@ export default class Example extends React.Component {
 
 You can read this documentation: https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/prop-types.md
 
-To fix the linter error of the function `require` is not defined, we need to add this line in eslint config:
+To fix the linter error of the function `require` is not defined, we need to add this line in Eslint config:
 ```
 module.exports = {
     "env": {
@@ -242,7 +242,7 @@ https://stackoverflow.com/questions/72379695/how-to-navigate-to-another-componen
 https://stackoverflow.com/questions/42173786/react-router-pass-data-when-navigating-programmatically (Long Question StackOverflow)
 
 When I try to use this solution with the state, I had a problem with the deserialization because my data is too complicated. 
-This solution is very usefull when the data to transmit is simple.
+This solution is very useful when the data to transmit is simple.
 Or we must make a serializer of our complicated data.
 
 **NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
@@ -253,7 +253,7 @@ I use this documentation:
 https://stackoverflow.com/questions/31168014/pass-object-through-link-in-react-router (Question StackOverflow)
 
 I try this solution to the same problem of serialization, but without success, 
-I think this solution is usefull to redirect in other website.
+I think this solution is useful to redirect in other website.
 
 **NOTE:** To transmit data, we can use the primary class or a serializer to convert complicated data in primary class.
 
@@ -278,7 +278,7 @@ But with the architecture, I think use that to implement a service to call my AP
 
 ## Step 14: Use HTML Element
 
-I use this documentation to know the specific attributes usefull : 
+I use this documentation to know the specific attributes useful: 
 https://developer.mozilla.org/fr/docs/Web/HTML/Element (Official Doc)
 
 **NOTE:** I use this documentation at this moment to force to write just number in inputs.
@@ -293,3 +293,50 @@ And the speaker created this website and company:
 https://www.alsacreations.com/
 
 
+## Step 16: Create API
+
+I use the Spring website: https://start.spring.io/
+Then to create my first controller, I use these documentations: 
+- https://spring.io/guides/tutorials/rest/ (Spring website Guide)
+- https://www.baeldung.com/spring-boot-run-maven-vs-executable-jar (Blog/Book)
+
+## Step 17: Execute the manually the Java Program
+
+I used this documentation: 
+https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (Maven Docs)
+
+## Step 18: Transmit an JSON object and return a Model object in HTTP Response
+
+I used these documentation: 
+- https://stackoverflow.com/questions/29313687/trying-to-use-spring-boot-rest-to-read-json-string-from-post (StackOverFlow)
+- https://stackoverflow.com/questions/28466207/could-not-find-acceptable-representation-using-spring-boot-starter-web (StackOverFlow)
+- https://stackoverflow.com/questions/49560795/spring-boot-failed-write-http-message-springframework-http-converter-httpme (StackOverFlow)
+These documentations permit to specify the header, produces and objects to used for the need.
+
+And I asked at ChatGPT, that it answer my problem can be resolved by add JsonSerialize annotation on object model, 
+the two JSON dependencies in POM, the constructor, getter and setter declared public.
+
+## Step 19: Fix my IDE with multi language project
+
+I used this documentation:
+https://www.baeldung.com/java-declared-expected-package-error (Blog/Book)
+
+## Step 20: Call REST API with React App
+
+I used this documentation:
+https://jasonwatmore.com/post/2020/02/01/react-fetch-http-post-request-examples (Blog)
+
+## Step 21: Fix the CORS Problem
+
+I use these documentations to fix my problem:
+- https://developer.mozilla.org/fr/docs/Web/HTTP/CORS/Errors/CORSMissingAllowOrigin?utm_source=devtools&utm_medium=firefox-cors-errors&utm_campaign=default (Official Doc that explain the problem)
+- https://stackoverflow.com/questions/70842496/react-post-request-to-java-spring-rest-api-cors-error (StackOverFlow)
+- https://www.stackhawk.com/blog/react-cors-guide-what-it-is-and-how-to-enable-it/ (Blog - purpose solution in JS)
+
+**NOTE:** Many people purpose to config `Access-Control-Allow-Origin` with `*`, it is not a solution.
+And I use ChatGPT, because I don't see the annotation @CrossOrigin in Java class on StackOverFlow whereas the annotation it was used in the answer ^^'.
+
+## Step 22: use handling event on button click
+
+I use this documentation:
+https://legacy.reactjs.org/docs/handling-events.html (Legacy Official Doc)

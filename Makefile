@@ -15,3 +15,6 @@ client-dev:
 
 client-prod: 
 	cd client/ && npm run build-prod
+
+session-dev:
+	cd sessionapi/ && mvn clean package && java -jar ./target/sessionapi-0.0.1-SNAPSHOT.jar

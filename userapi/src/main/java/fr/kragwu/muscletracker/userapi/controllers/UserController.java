@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.kragwu.muscletracker.userapi.dto.Registration;
 import fr.kragwu.muscletracker.userapi.dto.Session;
 import fr.kragwu.muscletracker.userapi.dto.User;
+import fr.kragwu.muscletracker.userapi.security.Cipher;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 import fr.kragwu.muscletracker.userapi.utils.SessionJSONParser;
 import fr.kragwu.muscletracker.userapi.utils.RegistrationJSONParser;
@@ -35,7 +36,7 @@ public class UserController {
 
     @PostMapping(value = "/login", headers = {"Accept=application/json"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Session> login(@RequestBody Registration payload) {
-        System.out.println("Login User : " + payload.getLogin());
+        System.out.println("Login User : " + payload);
         Registration register = RegistrationJSONParser.readJSON(payload);
         User user = new User();
         Session session = new Session();
@@ -56,7 +57,7 @@ public class UserController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(@RequestBody Registration payload) {
-        System.out.println("Register User : " + payload.getLogin());
+        System.out.println("Register User : " + payload);
         Registration register = RegistrationJSONParser.readJSON(payload);
         User user = new User();
         user.setId(UUID.randomUUID().toString());
@@ -81,6 +82,7 @@ public class UserController {
     public ResponseEntity<String> authorize(@RequestBody Session payload) {
         System.out.println("Authorize User : " + payload.getId());
         Session session = SessionJSONParser.readJSON(payload);
+        session.setLoginDateTime(LocalDateTime.now());
         Optional<Session> result = userService.authorize(session);
         return result.isPresent() ? ResponseEntity.status(200).body("OK") : 
             ResponseEntity.status(401).body("Unauthorized");

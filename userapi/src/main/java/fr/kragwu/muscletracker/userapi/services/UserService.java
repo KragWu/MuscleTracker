@@ -1,5 +1,6 @@
 package fr.kragwu.muscletracker.userapi.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import fr.kragwu.muscletracker.userapi.dto.Session;
 import fr.kragwu.muscletracker.userapi.dto.User;
+import fr.kragwu.muscletracker.userapi.security.Cipher;
 
 @Service
 public class UserService {
@@ -18,18 +20,26 @@ public class UserService {
     public boolean registerUser(User user) {
         Optional<User> optUser = getUser(user);
         if (!optUser.isPresent()) {
+            String currentDate = LocalDate.now().toString();
+            String userLogin = Cipher.decrypt(user.getLogin(), currentDate);
+            user.setLogin(userLogin);
             listUsers.add(user);
         }
-        System.out.println(!optUser.isPresent());
         return !optUser.isPresent();
     }
 
     public Optional<User> getUser(User user) {
         Optional<User> result = Optional.empty();
-        if (user != null && user.getLogin() != null && user.getPassword() != null) {
+        if (user != null && user.getLogin() != null) {
+            String currentDate = LocalDate.now().toString();
+            String userLogin = Cipher.decrypt(user.getLogin(), currentDate);
             for (User userList : listUsers) {
-                if (user.getLogin().equals(userList.getLogin()) && user.getPassword().equals(userList.getPassword())) {
-                    result = Optional.of(userList);
+                if (userLogin.equals(userList.getLogin())) {
+                    String userPassword = Cipher.decrypt(user.getPassword(), currentDate);
+                    String userListPassword = Cipher.decrypt(userList.getPassword(), userList.getRegistrationDate().toString());
+                    if (userPassword.equals(userListPassword)) {
+                        result = Optional.of(userList);
+                    }
                 }
             }
         }
@@ -57,9 +67,9 @@ public class UserService {
 
     public Optional<Session> getSession(Session session) {
         Optional<Session> result = Optional.empty();
-        if (session != null && session.getId() != null) {
+        if (session != null && session.getIdUser() != null) {
             for (Session sessionList : listSessions) {
-                if (session.getId().equals(sessionList.getId())) {
+                if (session.getIdUser().equals(sessionList.getIdUser())) {
                     result = Optional.of(sessionList);
                 }
             }
@@ -73,7 +83,10 @@ public class UserService {
             for (Session sessionList : listSessions) {
                 if (session.getId().equals(sessionList.getId()) && 
                     session.getToken().equals(sessionList.getToken())) {
-                    result = Optional.of(sessionList);
+                    if (session.getLoginDateTime().compareTo(
+                        sessionList.getLoginDateTime().plusHours(2)) < 0) {
+                        result = Optional.of(sessionList);
+                    }
                 }
             }
         }

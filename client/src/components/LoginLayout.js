@@ -15,8 +15,30 @@ class LoginLayout extends React.Component {
 
     handleConnexion() {
         const username = document.getElementById("username").value
+        let usernameOK = true
+        if (username == undefined || username == "") {
+            usernameOK = false
+            document.getElementById("identifiantObligatoire").hidden = false
+            document.getElementById("erreurIdentifiant").hidden = true
+            document.getElementById("erreurConnexion").hidden = true
+        } else {
+            document.getElementById("identifiantObligatoire").hidden = true
+            document.getElementById("erreurIdentifiant").hidden = true
+            document.getElementById("erreurConnexion").hidden = true
+        }
         const password = document.getElementById("password").value
-        login(username, password).then((sessionResult) => {
+        let passwordOK = true
+        if (password == undefined || password == "") {
+            passwordOK = false
+            document.getElementById("passwordObligatoire").hidden = false
+            document.getElementById("erreurIdentifiant").hidden = true
+            document.getElementById("erreurConnexion").hidden = true
+        } else {
+            document.getElementById("passwordObligatoire").hidden = true
+            document.getElementById("erreurIdentifiant").hidden = true
+            document.getElementById("erreurConnexion").hidden = true
+        }
+        usernameOK && passwordOK && login(username, password).then((sessionResult) => {
             console.log("login OK = " + sessionResult)
             authorize(sessionResult.id, sessionResult.token).then(() => {
                 console.log("authorize OK")
@@ -30,6 +52,11 @@ class LoginLayout extends React.Component {
             })
         }, (reason) => {
             console.log("login KO = " + reason)
+            if (reason == "Error: login Unknown") {
+                document.getElementById("erreurIdentifiant").hidden = false
+            } else {
+                document.getElementById("erreurConnexion").hidden = false
+            }            
             this.setState({connected: false})
         })
     }
@@ -47,12 +74,28 @@ class LoginLayout extends React.Component {
                 <br />
                 <input id="username" type="text" className="alleger"/>
                 <br />
+                <div id="identifiantObligatoire" className="messageErreur" hidden>
+                    <label>Identifiant obligatoire</label>
+                    <br />
+                </div>
                 <label htmlFor="password" className="alleger">
                     Mot de passe
                 </label>
                 <br />
                 <input id="password" type="password" className="alleger"/>
                 <br />
+                <div id="passwordObligatoire" className="messageErreur" hidden>
+                    <label>Mot de passe obligatoire</label>
+                    <br />
+                </div>
+                <div id="erreurIdentifiant" className="messageErreur" hidden>
+                    <label>Erreur d'identifiant</label>
+                    <br />
+                </div>
+                <div id="erreurConnexion" className="messageErreur" hidden>
+                    <label>Connexion indisponible</label>
+                    <br />
+                </div>
                 <button className="connexion buttonLogin alleger" onClick={() => this.handleConnexion()} >Connexion</button>
             </div>
             <div>

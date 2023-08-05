@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import {TabMenu} from 'primereact/tabmenu'
 import "../Global.css"
+import imgDeconnexion from './assets/deconnexion.png'
 
 const HeaderLayout = () => {
 
@@ -32,13 +33,16 @@ const HeaderLayout = () => {
   return (
     <>
       <div>
-        <h1 className="Title-App centrage" >Muscle Tracker</h1>
+        <div>
+          <h1 className="Title-App centrage" >Muscle Tracker</h1>
+          { sessionStorage.getItem("userId") == undefined ? "" : 
+            <img src={imgDeconnexion} title="Déconnexion" className="buttonLogout alleger" alt="Deconnexion" onClick={() => navigate("/logout")}></img>}
+        </div>
         {
           sessionStorage.getItem("userId") == undefined ? <TabMenu model={itemNoLogin} activeIndex={computeUrl(itemNoLogin)} /> :          
         <TabMenu model={items} activeIndex={computeUrl(items)} />
         }
       </div>
-
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we defined above. */}

@@ -9,6 +9,10 @@ button {
     font-weight: bold;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 h2 {
     text-align: center;
 }
@@ -27,6 +31,10 @@ img {
 /** Global **/
 .centrage {
     text-align: center;
+}
+
+.messageErreur {
+    color: red;
 }
 
 /** Login Layout **/
@@ -48,6 +56,18 @@ img {
     border-radius: 10px;
     width: 150px;
     height: 40px;
+}
+
+.buttonLogout {
+    position: fixed;
+    margin-right: 5px;
+    top: 0;
+    right: 0;
+    height: 25px;
+}
+
+.buttonLogout:hover {
+    cursor: pointer;
 }
 
 

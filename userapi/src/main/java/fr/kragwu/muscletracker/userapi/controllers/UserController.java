@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.kragwu.muscletracker.userapi.dto.Registration;
 import fr.kragwu.muscletracker.userapi.dto.Session;
 import fr.kragwu.muscletracker.userapi.dto.User;
-import fr.kragwu.muscletracker.userapi.security.Cipher;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 import fr.kragwu.muscletracker.userapi.utils.SessionJSONParser;
 import fr.kragwu.muscletracker.userapi.utils.RegistrationJSONParser;

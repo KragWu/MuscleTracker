@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../userapi">
+      <sourceFolder url="file://$MODULE_DIR$/../userapi/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../userapi/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../userapi/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../userapi/target" />
+    </content>
+    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:3.1.0" level="project" />
+  </component>
+</module>

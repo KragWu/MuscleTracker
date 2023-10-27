@@ -1,9 +1,9 @@
 package fr.kragwu.muscletracker.userapi.utils;
 
-import fr.kragwu.muscletracker.userapi.dto.Session;
+import fr.kragwu.muscletracker.userapi.dto.SessionDTO;
 
 public class SessionJSONParser {
-    public static Session readJSON(Session session) {
-        return new Session(session.getId(), null, null, null, session.getToken());
+    public static SessionDTO readJSON(SessionDTO sessionDTO) {
+        return new SessionDTO(sessionDTO.getId(), null, null, null, sessionDTO.getToken());
     }
 }

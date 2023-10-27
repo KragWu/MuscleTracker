@@ -59,18 +59,22 @@ async function authorize(idSession, token) {
 }
 
 async function logout(idSession, token) {
-    const body = {
-        "id": idSession,
-        "token": token
-    }
-    console.log("call User API logout")
-    // Can add userid in headers
-    const response = await fetch('http://localhost:8080/logout', { method: 'POST', mode: "cors", body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}});
-    const data = await response.text()
-    if (response.status != 200) {
-        throw new Error("failed logout")
+    if (idSession == null) {
+        return ""
     } else {
-        return data
+        const body = {
+            "id": idSession,
+            "token": token
+        }
+        console.log("call User API logout")
+        // Can add userid in headers
+        const response = await fetch('http://localhost:8080/logout', { method: 'POST', mode: "cors", body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}});
+        const data = await response.text()
+        if (response.status != 200) {
+            throw new Error("failed logout")
+        } else {
+            return data
+        }
     }
 }
 

@@ -1,17 +1,27 @@
-package fr.kragwu.muscletracker.userapi.dto;
+package fr.kragwu.muscletracker.userapi.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-@JsonDeserialize
+@Entity
+@Table(name = "session", schema = "client")
 public class Session {
-    String id;
-    String idUser;
-    LocalDateTime loginDateTime;
-    LocalDateTime logoutDateTime;
-    String token;
 
+    @Id
+    @Column(name = "id", nullable = false)
+    String id;
+    @Column(name = "idUser", nullable = false)
+    String idUser;
+    @Column(name = "loginDate", nullable = false)
+    LocalDateTime loginDateTime;
+    @Column(name = "logoutDate")
+    LocalDateTime logoutDateTime;
+    @Column(name = "token", nullable = false)
+    String token;
 
     public Session() {
         super();
@@ -98,10 +108,10 @@ public class Session {
 
     @Override
     public String toString() {
-        return "Session(id = "+ this.id + 
-        ", idUser = "+ this.idUser + 
-        ", loginDateTime = "+ this.loginDateTime + 
-        ", logoutDateTime = "+ this.logoutDateTime + 
-        ", token = "+ this.token + ")";
+        return "Session(id = "+ this.id +
+                ", idUser = "+ this.idUser +
+                ", loginDateTime = "+ this.loginDateTime +
+                ", logoutDateTime = "+ this.logoutDateTime +
+                ", token = "+ this.token + ")";
     }
 }

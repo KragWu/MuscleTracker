@@ -3,15 +3,15 @@ package fr.kragwu.muscletracker.userapi.dto;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize
-public class Registration {
+public class RegistrationDTO {
     String login;
     String password;
 
-    public Registration() {
+    public RegistrationDTO() {
         super();
     }
     
-    public Registration(String login, String password) {
+    public RegistrationDTO(String login, String password) {
         super();
         this.login = login;
         this.password = password;

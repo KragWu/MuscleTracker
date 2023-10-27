@@ -5,18 +5,18 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize
-public class User {
+public class UserDTO {
     String id;
     String login;
     String password;
     LocalDate registrationDate;
 
 
-    public User() {
+    public UserDTO() {
         super();
     }
 
-    public User(String id, String login, String password, LocalDate registrationDate) {
+    public UserDTO(String id, String login, String password, LocalDate registrationDate) {
         super();
         this.id = id;
         this.login = login;
@@ -58,7 +58,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User(id = "+ this.id + 
+        return "UserDTO(id = "+ this.id +
         ", login = "+ this.login + 
         ", password = "+ this.password + 
         ", registrationDate = "+ this.registrationDate + ")";

@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--Added the entity User-->
+    <changeSet id="20230819-2" author="kragwu">
+        <createTable tableName="session">
+            <column name="id" type="varchar(255)" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="id_user" type="varchar(255)">
+                <constraints unique="true" nullable="false" />
+            </column>
+            <column name="login_date" type="timestamp(6)">
+                <constraints nullable="false" />
+            </column>
+            <column name="logout_date" type="timestamp(6)">
+                <constraints nullable="true" />
+            </column>
+            <column name="token" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

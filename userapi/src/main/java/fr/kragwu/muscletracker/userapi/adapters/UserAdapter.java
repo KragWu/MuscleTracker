@@ -1,7 +1,7 @@
 package fr.kragwu.muscletracker.userapi.adapters;
 
-import fr.kragwu.muscletracker.userapi.dto.UserDTO;
-import fr.kragwu.muscletracker.userapi.entities.User;
+import fr.kragwu.muscletracker.userapi.controllers.dto.UserDTO;
+import fr.kragwu.muscletracker.userapi.repositories.entities.User;
 
 public class UserAdapter {
 

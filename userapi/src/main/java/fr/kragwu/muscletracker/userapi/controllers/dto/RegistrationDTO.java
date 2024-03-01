@@ -1,10 +1,14 @@
-package fr.kragwu.muscletracker.userapi.dto;
+package fr.kragwu.muscletracker.userapi.controllers.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import jakarta.validation.constraints.NotNull;
+
 @JsonDeserialize
 public class RegistrationDTO {
+    @NotNull
     String login;
+    @NotNull
     String password;
 
     public RegistrationDTO() {

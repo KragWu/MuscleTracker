@@ -1,6 +1,6 @@
 package fr.kragwu.muscletracker.userapi.utils;
 
-import fr.kragwu.muscletracker.userapi.dto.RegistrationDTO;
+import fr.kragwu.muscletracker.userapi.controllers.dto.RegistrationDTO;
 
 public class RegistrationJSONParser {
     public static RegistrationDTO readJSON(RegistrationDTO registrationDTO) {

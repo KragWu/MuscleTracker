@@ -1,7 +1,7 @@
 package fr.kragwu.muscletracker.userapi.adapters;
 
-import fr.kragwu.muscletracker.userapi.dto.SessionDTO;
-import fr.kragwu.muscletracker.userapi.entities.Session;
+import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
+import fr.kragwu.muscletracker.userapi.repositories.entities.Session;
 
 public class SessionAdapter {
 

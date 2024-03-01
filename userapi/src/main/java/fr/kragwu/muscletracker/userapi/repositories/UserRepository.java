@@ -1,8 +1,9 @@
 package fr.kragwu.muscletracker.userapi.repositories;
 
-import fr.kragwu.muscletracker.userapi.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+
+import fr.kragwu.muscletracker.userapi.repositories.entities.User;
 
 import java.util.Optional;
 

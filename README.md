@@ -15,4 +15,5 @@ Il faudra donc penser à démarrer/éteindre l'intance podman via la commande su
 podman machin start/stop
 ```
 
-La commande pour démarrer la BDD se trouve dans le makefile.
+La commande pour démarrer la BDD se trouve dans le makefile, lors du premier démarrage.
+Sinon, vous pouvez relancer votre ancien container : `podman container start 2adee7de3f94`

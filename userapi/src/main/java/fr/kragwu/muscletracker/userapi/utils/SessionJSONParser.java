@@ -1,6 +1,6 @@
 package fr.kragwu.muscletracker.userapi.utils;
 
-import fr.kragwu.muscletracker.userapi.dto.SessionDTO;
+import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
 
 public class SessionJSONParser {
     public static SessionDTO readJSON(SessionDTO sessionDTO) {

@@ -1,23 +1,33 @@
-package fr.kragwu.muscletracker.userapi.dto;
+package fr.kragwu.muscletracker.userapi.repositories.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+@Entity
+@Table(name = "session", schema = "client")
+public class Session {
 
-@JsonDeserialize
-public class SessionDTO {
+    @Id
+    @Column(name = "id", nullable = false)
     String id;
+    @Column(name = "idUser", nullable = false)
     String idUser;
+    @Column(name = "loginDate", nullable = false)
     LocalDateTime loginDateTime;
+    @Column(name = "logoutDate")
     LocalDateTime logoutDateTime;
+    @Column(name = "token", nullable = false)
     String token;
 
-
-    public SessionDTO() {
+    public Session() {
         super();
     }
 
-    public SessionDTO(String id, String idUser, LocalDateTime loginDateTime, LocalDateTime logoutDateTime, String token) {
+    public Session(String id, String idUser, LocalDateTime loginDateTime, LocalDateTime logoutDateTime, String token) {
         super();
         this.id = id;
         this.idUser = idUser;
@@ -66,47 +76,42 @@ public class SessionDTO {
         return this.token;
     }
 
-    public SessionDTO update(SessionDTO sessionDTO) {
-        SessionDTO result = new SessionDTO();
-        if (sessionDTO.getId() == null || sessionDTO.getId().isEmpty()) {
-            System.out.println("Update Id by BDD");
+    public Session update(Session session) {
+        Session result = new Session();
+        if (session.getId() == null || session.getId().isEmpty()) {
             result.setId(this.id);
         } else {
-            result.setId(sessionDTO.getId());
+            result.setId(session.getId());
         }
-        if (sessionDTO.getIdUser() == null || sessionDTO.getIdUser().isEmpty()) {
-            System.out.println("Update IdUser by BDD");
+        if (session.getIdUser() == null || session.getIdUser().isEmpty()) {
             result.setIdUser(this.idUser);
         } else {
-            result.setIdUser(sessionDTO.getIdUser());
+            result.setIdUser(session.getIdUser());
         }
-        if (sessionDTO.getLoginDateTime() == null) {
-            System.out.println("Update LoginDate by BDD");
+        if (session.getLoginDateTime() == null) {
             result.setLoginDateTime(this.loginDateTime);
         } else {
-            result.setLoginDateTime(sessionDTO.getLoginDateTime());
+            result.setLoginDateTime(session.getLoginDateTime());
         }
-        if (sessionDTO.getLogoutDateTime() == null) {
-            System.out.println("Update LogoutDate by BDD");
+        if (session.getLogoutDateTime() == null) {
             result.setLogoutDateTime(this.logoutDateTime);
         } else {
-            result.setLogoutDateTime(sessionDTO.getLogoutDateTime());
+            result.setLogoutDateTime(session.getLogoutDateTime());
         }
-        if (sessionDTO.getToken() == null || sessionDTO.getToken().isEmpty()) {
-            System.out.println("Update Token by BDD");
+        if (session.getToken() == null || session.getToken().isEmpty()) {
             result.setToken(this.token);
         } else {
-            result.setToken(sessionDTO.getToken());
+            result.setToken(session.getToken());
         }
         return result;
     }
 
     @Override
     public String toString() {
-        return "SessionDTO(id = "+ this.id +
-        ", idUser = "+ this.idUser + 
-        ", loginDateTime = "+ this.loginDateTime + 
-        ", logoutDateTime = "+ this.logoutDateTime + 
-        ", token = "+ this.token + ")";
+        return "Session(id = "+ this.id +
+                ", idUser = "+ this.idUser +
+                ", loginDateTime = "+ this.loginDateTime +
+                ", logoutDateTime = "+ this.logoutDateTime +
+                ", token = "+ this.token + ")";
     }
 }

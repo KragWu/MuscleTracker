@@ -6,24 +6,29 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import fr.kragwu.muscletracker.userapi.adapters.SessionAdapter;
 import fr.kragwu.muscletracker.userapi.adapters.UserAdapter;
-import fr.kragwu.muscletracker.userapi.entities.Session;
-import fr.kragwu.muscletracker.userapi.entities.User;
+import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
+import fr.kragwu.muscletracker.userapi.controllers.dto.UserDTO;
 import fr.kragwu.muscletracker.userapi.repositories.SessionRepository;
 import fr.kragwu.muscletracker.userapi.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import fr.kragwu.muscletracker.userapi.repositories.entities.Session;
+import fr.kragwu.muscletracker.userapi.repositories.entities.User;
+
 import org.springframework.stereotype.Service;
 
-import fr.kragwu.muscletracker.userapi.dto.SessionDTO;
-import fr.kragwu.muscletracker.userapi.dto.UserDTO;
 import fr.kragwu.muscletracker.userapi.security.Cipher;
 
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    SessionRepository sessionRepository;
+    private final UserRepository userRepository;
+
+    private final SessionRepository sessionRepository;
+
+    public UserService(UserRepository userRepository, SessionRepository sessionRepository) {
+        this.userRepository = userRepository;
+        this.sessionRepository = sessionRepository;
+    }
+    
     //List<UserDTO> listUserDTOS = new ArrayList<>();
     //List<SessionDTO> listSessionDTOS = new ArrayList<>();
 

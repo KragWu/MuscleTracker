@@ -1,31 +1,22 @@
-package fr.kragwu.muscletracker.userapi.entities;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+package fr.kragwu.muscletracker.userapi.controllers.dto;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "utilisateur", schema = "client")
-public class User {
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-    @Id
-    @Column(name = "id", nullable = false)
+@JsonDeserialize
+public class UserDTO {
     String id;
-    @Column(name = "login", unique = true, nullable = false)
     String login;
-    @Column(name = "password", nullable = false)
     String password;
-    @Column(name = "registrationDate", nullable = false)
     LocalDate registrationDate;
 
-    public User() {
+
+    public UserDTO() {
         super();
     }
 
-    public User(String id, String login, String password, LocalDate registrationDate) {
+    public UserDTO(String id, String login, String password, LocalDate registrationDate) {
         super();
         this.id = id;
         this.login = login;
@@ -67,9 +58,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User(id = "+ this.id +
-                ", login = "+ this.login +
-                ", password = "+ this.password +
-                ", registrationDate = "+ this.registrationDate + ")";
+        return "UserDTO(id = "+ this.id +
+        ", login = "+ this.login + 
+        ", password = "+ this.password + 
+        ", registrationDate = "+ this.registrationDate + ")";
     }
 }

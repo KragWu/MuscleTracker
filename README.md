@@ -12,7 +12,7 @@ L'application utilise une base de données postgres, qu'on instancie avec podman
 Il faudra donc penser à démarrer/éteindre l'intance podman via la commande suivante : 
 
 ```
-podman machin start/stop
+podman machine start/stop
 ```
 
 La commande pour démarrer la BDD se trouve dans le makefile, lors du premier démarrage.

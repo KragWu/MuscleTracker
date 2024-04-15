@@ -17,7 +17,7 @@ client-prod:
 	cd client/ && npm run build-prod
 
 user-test:
-	cd userapi/ && mvn clean test
+	export TESTCONTAINERS_RYUK_DISABLED=true && cd userapi/ && mvn clean test
 
 user-dev:
 	cd userapi/ && mvn clean package && java -jar ./target/userapi-0.0.1-SNAPSHOT.jar

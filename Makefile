@@ -23,7 +23,7 @@ user-dev:
 	cd userapi/ && mvn clean package && java -jar ./target/userapi-0.0.1-SNAPSHOT.jar
 
 start-bdd:
-	podman run --name bdd-muscletracker -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=mU5CLetR4CKEr -e POSTGRES_DB=postgres  -p 5432:5432 -d 43677b39c446
+	podman run --name bdd-muscletracker -e POSTGRES_USER= -e POSTGRES_PASSWORD= -e POSTGRES_DB=postgres  -p 5432:5432 -d id
 
 stop-bdd:
 	podman container stop bdd-muscletracker

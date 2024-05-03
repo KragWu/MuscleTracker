@@ -65,10 +65,8 @@ public class UserController {
                     return sessionDTO;
                 }
             )
-            .map(sessionDTO -> {
-                return sessionDTO.getId().isEmpty() ? ResponseEntity.status(400).body(null) :
-                     ResponseEntity.status(200).body(sessionDTO);
-            });
+            .map(sessionDTO -> sessionDTO.getId().isEmpty() ? ResponseEntity.status(400).body(null) :
+                 ResponseEntity.status(200).body(sessionDTO));
     }
 
     @PostMapping(value = "/register")
@@ -87,10 +85,8 @@ public class UserController {
                 userDTO.setRegistrationDate(LocalDate.now());
                 return userDTO;
             })
-            .map(userDTO -> {
-                return userService.registerUser(userDTO) ? ResponseEntity.status(201).body("OK") :
-                    ResponseEntity.status(400).body("KO");
-            });
+            .map(userDTO -> userService.registerUser(userDTO) ? ResponseEntity.status(201).body("OK") :
+                ResponseEntity.status(400).body("KO"));
     }
 
     @PostMapping(value = "/logout")
@@ -117,12 +113,8 @@ public class UserController {
                 sessionDTO.setLoginDateTime(LocalDateTime.now());
                 return sessionDTO;
             })
-            .map(sessionDTO -> {
-                return userService.authorize(sessionDTO);
-            })
-            .map(optSessionDTO -> {
-                return optSessionDTO.isPresent() ? ResponseEntity.status(200).body("OK") : 
-                    ResponseEntity.status(401).body("Unauthorized");
-            });
+            .map(userService::authorize)
+            .map(optSessionDTO -> optSessionDTO.isPresent() ? ResponseEntity.status(200).body("OK") :
+                ResponseEntity.status(401).body("Unauthorized"));
     }
 }

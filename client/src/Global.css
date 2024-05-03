@@ -9,6 +9,10 @@ button {
     font-weight: bold;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 h2 {
     text-align: center;
 }
@@ -28,6 +32,44 @@ img {
 .centrage {
     text-align: center;
 }
+
+.messageErreur {
+    color: red;
+}
+
+/** Login Layout **/
+
+.alleger {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+.inscription {
+    background-color: #16A34A;
+}
+
+.connexion {
+    background-color: #4F46E5;
+}
+
+.buttonLogin {
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+}
+
+.buttonLogout {
+    position: fixed;
+    margin-right: 5px;
+    top: 0;
+    right: 0;
+    height: 25px;
+}
+
+.buttonLogout:hover {
+    cursor: pointer;
+}
+
 
 /** Header Layout **/
 .Title-App {

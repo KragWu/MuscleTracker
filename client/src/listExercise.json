@@ -119,6 +119,13 @@
         "id_name_bis": ""
     },
     {
+        "name": "Crunch incliné",
+        "tools": ["Aucun"],
+        "muscle": ["Abdos"],
+        "id_name": "crunch",
+        "id_name_bis": ""
+    },
+    {
         "name": "Squat",
         "tools": ["Barre"],
         "muscle": ["Quadriceps"],
@@ -151,6 +158,20 @@
         "tools": ["Banc", "Haltère"],
         "muscle": ["Avant-Bras"],
         "id_name": "curlssupi",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Pince à main",
+        "tools": ["Aucun"],
+        "muscle": ["Avant-Bras"],
+        "id_name": "pincemain",
+        "id_name_bis": ""
+    },
+    {
+        "name": "Pince à doigts",
+        "tools": ["Aucun"],
+        "muscle": ["Avant-Bras"],
+        "id_name": "pincedoigt",
         "id_name_bis": ""
     }
 ]

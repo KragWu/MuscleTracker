@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import fr.kragwu.muscletracker.userapi.adapters.SessionAdapter;
 import fr.kragwu.muscletracker.userapi.adapters.UserAdapter;
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
-import fr.kragwu.muscletracker.userapi.controllers.dto.UserDTO;
+import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import fr.kragwu.muscletracker.userapi.repositories.SessionRepository;
 import fr.kragwu.muscletracker.userapi.repositories.UserRepository;
 import fr.kragwu.muscletracker.userapi.repositories.entities.Session;
@@ -28,30 +28,26 @@ public class UserService {
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
     }
-    
-    //List<UserDTO> listUserDTOS = new ArrayList<>();
-    //List<SessionDTO> listSessionDTOS = new ArrayList<>();
 
-    public boolean registerUser(UserDTO userDTO) {
-        Optional<UserDTO> optUser = getUser(userDTO);
+    public boolean registerUser(UserBO userBO) {
+        Optional<UserBO> optUser = getUser(userBO);
         if (optUser.isEmpty()) {
             String currentDate = LocalDate.now().toString();
-            String userLogin = Cipher.decrypt(userDTO.getLogin(), currentDate);
-            userDTO.setLogin(userLogin);
-            //listUserDTO.add(userDTO);
-            userRepository.save(UserAdapter.transformDTOtoDAO(userDTO));
+            String userLogin = Cipher.decrypt(userBO.getLogin(), currentDate);
+            userBO.setLogin(userLogin);
+            userRepository.save(UserAdapter.transformDTOtoDAO(userBO));
         }
         return optUser.isEmpty();
     }
 
-    public Optional<UserDTO> getUser(UserDTO userDTO) {
-        AtomicReference<Optional<UserDTO>> result = new AtomicReference<>(Optional.empty());
-        if (userDTO != null && userDTO.getLogin() != null) {
+    public Optional<UserBO> getUser(UserBO userBO) {
+        AtomicReference<Optional<UserBO>> result = new AtomicReference<>(Optional.empty());
+        if (userBO != null && userBO.getLogin() != null) {
             String currentDate = LocalDate.now().toString();
-            String userLogin = Cipher.decrypt(userDTO.getLogin(), currentDate);
+            String userLogin = Cipher.decrypt(userBO.getLogin(), currentDate);
             Optional<User> optUser = userRepository.findByLogin(userLogin);
             optUser.ifPresentOrElse(user -> {
-                        String userPassword = Cipher.decrypt(userDTO.getPassword(), currentDate);
+                        String userPassword = Cipher.decrypt(userBO.getPassword(), currentDate);
                         String userListPassword = Cipher.decrypt(user.getPassword(), user.getRegistrationDate().toString());
                         if (userPassword.equals(userListPassword)) {
                             result.set(Optional.of(UserAdapter.transformDAOtoDTO(user)));
@@ -71,14 +67,11 @@ public class UserService {
         optSessionDTO.ifPresentOrElse(sessionDTOFind -> {
             System.out.println("Session found");
             sessionRepository.delete(SessionAdapter.transformDTOtoDAO(sessionDTOFind));
-            //listSessionDTOS.remove(sessionDTOFind);
             sessionDTOFind = sessionDTOFind.update(sessionDTO);
             sessionRepository.save(SessionAdapter.transformDTOtoDAO(sessionDTOFind));
-            //listSessionDTOS.add(sessionDTO);
         }, () -> {
             System.out.println("Session not found");
             sessionRepository.save(SessionAdapter.transformDTOtoDAO(sessionDTO));
-            //listSessionDTOS.add(sessionDTO);
         });
     }
 
@@ -86,23 +79,21 @@ public class UserService {
         Optional<SessionDTO> optSessionDTO = getSession(sessionDTO);
         optSessionDTO.ifPresent(sessionDTOFind -> {
             sessionRepository.delete(SessionAdapter.transformDTOtoDAO(sessionDTOFind));
-            //listSessionDTOS.remove(sessionDTOFind);
-            sessionDTOFind = sessionDTOFind.update(sessionDTO);
+            sessionDTOFind = sessionDTO.update(sessionDTOFind);
             sessionRepository.save(SessionAdapter.transformDTOtoDAO(sessionDTOFind));
-            //listSessionDTOS.add(sessionDTO);
         });
     }
 
     public Optional<SessionDTO> getSession(SessionDTO sessionDTO) {
         AtomicReference<Optional<SessionDTO>> result = new AtomicReference<>(Optional.empty());
         if (sessionDTO != null) {
-            System.out.println("SessionDTO : " + sessionDTO.toString());
+            System.out.println("SessionDTO : " + sessionDTO);
             if(sessionDTO.getIdUser() != null) {
                 Optional<Session> optSession = sessionRepository.findByIdUser(sessionDTO.getIdUser());
                 optSession.ifPresentOrElse(session -> result.set(Optional.of(SessionAdapter.transformDAOtoDTO(session))),
                         () -> System.out.println("Pas de session par IdUser"));
             }
-            if(!result.get().isPresent() && sessionDTO.getId() != null) {
+            if(result.get().isEmpty() && sessionDTO.getId() != null) {
                 Optional<Session> optSession = sessionRepository.findById(sessionDTO.getId());
                 optSession.ifPresentOrElse(session -> result.set(Optional.of(SessionAdapter.transformDAOtoDTO(session))),
                         () -> System.out.println("Pas de session par Id"));

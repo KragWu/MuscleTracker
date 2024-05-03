@@ -21,13 +21,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
-import fr.kragwu.muscletracker.userapi.controllers.dto.UserDTO;
+import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 
 @ActiveProfiles("test")
 class UserControllerTest {
-
-    private UserController controller;
 
     private UserService service;
 
@@ -36,7 +34,7 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         service = mock(UserService.class);
-        controller = new UserController(service);
+        UserController controller = new UserController(service);
         client = WebTestClient.bindToController(controller).configureClient().responseTimeout(Duration.ofMinutes(1)).build();
     }
 
@@ -55,12 +53,12 @@ class UserControllerTest {
     void login_succeed() {
         String login = "user";
         String password = "m0t2p45Se";
-        UserDTO userDTO = new UserDTO("1", login, password, LocalDate.now());
+        UserBO userBO = new UserBO("1", login, password, LocalDate.now());
         SessionDTO sessionDTO = new SessionDTO();
-        sessionDTO.setIdUser(userDTO.getId());
+        sessionDTO.setIdUser(userBO.getId());
         String body = String.format("{ \"login\": \"%s\", \"password\": \"%s\" }", login, password);
         
-        Mockito.when(service.getUser(any())).thenReturn(Optional.of(userDTO));
+        Mockito.when(service.getUser(any())).thenReturn(Optional.of(userBO));
         Mockito.doNothing().when(service).registerSession(sessionDTO);
         
         SessionDTO responseBody = client.post()
@@ -125,9 +123,9 @@ class UserControllerTest {
     void register_succeed() {
         String login = "user";
         String password = "m0t2p45Se";
-        UserDTO userDTO = new UserDTO("1", login, password, LocalDate.now());
+        UserBO userBO = new UserBO("1", login, password, LocalDate.now());
         SessionDTO sessionDTO = new SessionDTO();
-        sessionDTO.setIdUser(userDTO.getId());
+        sessionDTO.setIdUser(userBO.getId());
         String body = String.format("{ \"login\": \"%s\", \"password\": \"%s\" }", login, password);
         
         Mockito.when(service.registerUser(any())).thenReturn(true);
@@ -150,9 +148,9 @@ class UserControllerTest {
     void register_failed() {
         String login = "user";
         String password = "m0t2p45Se";
-        UserDTO userDTO = new UserDTO("1", login, password, LocalDate.now());
+        UserBO userBO = new UserBO("1", login, password, LocalDate.now());
         SessionDTO sessionDTO = new SessionDTO();
-        sessionDTO.setIdUser(userDTO.getId());
+        sessionDTO.setIdUser(userBO.getId());
         String body = String.format("{ \"login\": \"%s\", \"password\": \"%s\" }", login, password);
         
         Mockito.when(service.registerUser(any())).thenReturn(false);

@@ -1,22 +1,22 @@
-package fr.kragwu.muscletracker.userapi.controllers.dto;
+package fr.kragwu.muscletracker.userapi.services.bo;
 
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize
-public class UserDTO {
+public class UserBO {
     String id;
     String login;
     String password;
     LocalDate registrationDate;
 
 
-    public UserDTO() {
+    public UserBO() {
         super();
     }
 
-    public UserDTO(String id, String login, String password, LocalDate registrationDate) {
+    public UserBO(String id, String login, String password, LocalDate registrationDate) {
         super();
         this.id = id;
         this.login = login;

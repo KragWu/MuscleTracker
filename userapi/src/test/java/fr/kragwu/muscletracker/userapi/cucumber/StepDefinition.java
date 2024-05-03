@@ -1,8 +1,6 @@
 package fr.kragwu.muscletracker.userapi.cucumber;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
-import org.hamcrest.Matchers;
-import org.json.JSONObject;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.RegistrationDTO;
 import io.cucumber.java.en.Given;
@@ -25,7 +23,7 @@ public class StepDefinition {
     Response response;
 
     @Given("A new User")
-    public void a_new_user() {
+    public void aNewUser() {
         login = "test";
         password = "password";
         registrationDTO = new RegistrationDTO(login, password);
@@ -33,18 +31,18 @@ public class StepDefinition {
 
     @Given("A user already registered")
     public void aUserAlreadyRegistered() {
-        a_new_user();
+        aNewUser();
     }
 
     @Given("A user already login")
     public void aUserAlreadyLogin() {
-        a_new_user();
-        try_connect_first_time();
+        aNewUser();
+        tryConnectFirstTime();
         receivedSucceedLogin();
     }
 
     @When("Try to connect")
-    public void try_connect_first_time() {
+    public void tryConnectFirstTime() {
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -73,8 +71,18 @@ public class StepDefinition {
                 .post("/logout");
     }
 
+    @When("Try to authorize")
+    public void tryToAuthorize() {
+        response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(sessionDTO)
+                .when()
+                .post("/authorize");
+    }
+
     @Then("received error message unknown user")
-    public void received_error_unknown_user() {
+    public void receivedErrorUnknownUser() {
         assertEquals(400, response.statusCode());
         assertEquals("", response.getBody().asString());
     }
@@ -108,5 +116,17 @@ public class StepDefinition {
     public void receivedSucceedLogout() {
         assertEquals(200, response.statusCode());
         assertEquals("OK", response.getBody().asString());
+    }
+
+    @Then("received succeed authorization")
+    public void receivedSucceedAuthorization() {
+        assertEquals(200, response.statusCode());
+        assertEquals("OK", response.getBody().asString());
+    }
+
+    @Then("received failed authorization")
+    public void receivedFailedAuthorization() {
+        assertEquals(401, response.statusCode());
+        assertEquals("Unauthorized", response.getBody().asString());
     }
 }

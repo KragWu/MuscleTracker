@@ -1,3 +1,5 @@
+VERSION_API_USER=0.0.1-SNAPSHOT
+
 initiate:
 	@echo "Hello"
 
@@ -20,7 +22,7 @@ user-test:
 	export TESTCONTAINERS_RYUK_DISABLED=true && cd userapi/ && mvn clean test
 
 user-dev:
-	cd userapi/ && mvn clean package && java -jar ./target/userapi-0.0.1-SNAPSHOT.jar
+	export TESTCONTAINERS_RYUK_DISABLED=true && cd userapi/ && mvn clean package && java -jar ./target/userapi-${VERSION_API_USER}.jar
 
 start-bdd:
 	podman run --name bdd-muscletracker -e POSTGRES_USER= -e POSTGRES_PASSWORD= -e POSTGRES_DB=postgres  -p 5432:5432 -d id

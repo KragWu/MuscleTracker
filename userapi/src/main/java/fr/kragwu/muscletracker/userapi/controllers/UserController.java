@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.RegistrationDTO;
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
-import fr.kragwu.muscletracker.userapi.controllers.dto.UserDTO;
+import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 import fr.kragwu.muscletracker.userapi.utils.SessionJSONParser;
 import reactor.core.publisher.Mono;
@@ -41,23 +41,22 @@ public class UserController {
         return Mono.just(payload)
             .map( it -> {
                 System.out.println("Login User : " + it);
-                RegistrationDTO registerDTO = RegistrationJSONParser.readJSON(it);
-                return registerDTO;
+                return RegistrationJSONParser.readJSON(it);
             })
             .map(
                 registerDTO -> {
-                    UserDTO userDTO = new UserDTO();
-                    userDTO.setLogin(registerDTO.getLogin());
-                    userDTO.setPassword(registerDTO.getPassword());
-                    return userDTO;
+                    UserBO userBO = new UserBO();
+                    userBO.setLogin(registerDTO.getLogin());
+                    userBO.setPassword(registerDTO.getPassword());
+                    return userBO;
                 }
             )
             .map(
-                userDTO -> {
+                    userBO -> {
                     SessionDTO sessionDTO = new SessionDTO();
-                    userService.getUser(userDTO).ifPresentOrElse(userDTOFind -> {
+                    userService.getUser(userBO).ifPresentOrElse(userBOFind -> {
                         sessionDTO.setId(UUID.randomUUID().toString());
-                        sessionDTO.setIdUser(userDTOFind.getId());
+                        sessionDTO.setIdUser(userBOFind.getId());
                         sessionDTO.setLoginDateTime(LocalDateTime.now());
                         sessionDTO.setToken(UUID.randomUUID().toString());
                         userService.registerSession(sessionDTO);
@@ -74,18 +73,17 @@ public class UserController {
         return Mono.just(payload)
             .map(it -> {
                 System.out.println("Register User : " + it);
-                RegistrationDTO registerDTO = RegistrationJSONParser.readJSON(it);
-                return registerDTO;
+                return RegistrationJSONParser.readJSON(it);
             })
             .map(registerDTO -> {
-                UserDTO userDTO = new UserDTO();
-                userDTO.setId(UUID.randomUUID().toString());
-                userDTO.setLogin(registerDTO.getLogin());
-                userDTO.setPassword(registerDTO.getPassword());
-                userDTO.setRegistrationDate(LocalDate.now());
-                return userDTO;
+                UserBO userBO = new UserBO();
+                userBO.setId(UUID.randomUUID().toString());
+                userBO.setLogin(registerDTO.getLogin());
+                userBO.setPassword(registerDTO.getPassword());
+                userBO.setRegistrationDate(LocalDate.now());
+                return userBO;
             })
-            .map(userDTO -> userService.registerUser(userDTO) ? ResponseEntity.status(201).body("OK") :
+            .map(userBO -> userService.registerUser(userBO) ? ResponseEntity.status(201).body("OK") :
                 ResponseEntity.status(400).body("KO"));
     }
 

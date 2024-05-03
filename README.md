@@ -16,4 +16,4 @@ podman machine start/stop
 ```
 
 La commande pour démarrer la BDD se trouve dans le makefile, lors du premier démarrage.
-Sinon, vous pouvez relancer votre ancien container : `podman container start 2adee7de3f94`
+Sinon, vous pouvez relancer votre ancien container : `podman container start <id container>`

@@ -20,6 +20,11 @@ Feature: Testing a REST API
     When Try to register
     Then received failed register
 
+  Scenario: Authorized succeed
+    Given A user already login
+    When Try to authorize
+    Then received succeed authorization
+
   Scenario: Logout Succeed
     Given A user already login
     When Try to logout

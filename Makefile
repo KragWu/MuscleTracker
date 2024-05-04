@@ -3,20 +3,20 @@ VERSION_API_USER=0.0.1-SNAPSHOT
 initiate:
 	@echo "Hello"
 
-status:
-	cd client/ && npm run lint && npm run test && cd .. && git status
+status-react:
+	cd client-react/ && npm run lint && npm run test && cd .. && git status
 
-lint: 
-	cd client/ && npm run lint
+lint-react: 
+	cd client-react/ && npm run lint
 
-test: 
-	cd client/ && npm run test
+test-react: 
+	cd client-react/ && npm run test
 
-client-dev:
-	cd client/ && npm run serve-dev
+client-react-dev:
+	cd client-react/ && npm run serve-dev
 
-client-prod: 
-	cd client/ && npm run build-prod
+client-react-prod: 
+	cd client-react/ && npm run build-prod
 
 user-test:
 	export TESTCONTAINERS_RYUK_DISABLED=true && cd userapi/ && mvn clean test

@@ -18,6 +18,15 @@ client-react-dev:
 client-react-prod: 
 	cd client-react/ && npm run build-prod
 
+status-angular:
+	cd client-angular/ && npm run test && cd .. && git status
+
+test-angular: 
+	cd client-angular/ && npm run test
+
+client-angular-dev:
+	cd client-angular/ && npm run start
+
 user-test:
 	export TESTCONTAINERS_RYUK_DISABLED=true && cd userapi/ && mvn clean test
 

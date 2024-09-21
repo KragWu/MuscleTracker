@@ -147,8 +147,9 @@ psd
 thumb
 sketch
 
-### VisualStudioCode ###
+# Visual Studio Code
 .vscode/*
+.history/*
 
 # Local History for Visual Studio Code
 .history/
@@ -168,3 +169,38 @@ sketch
 coverage
 
 target/
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+.angular
+
+# Compiled output
+/tmp
+/out-tsc
+/bazel-out
+
+# Node
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db

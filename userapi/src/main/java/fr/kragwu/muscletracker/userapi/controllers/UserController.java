@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.RegistrationDTO;
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
+import fr.kragwu.muscletracker.userapi.controllers.dto.StatusDTO;
 import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 import fr.kragwu.muscletracker.userapi.utils.SessionJSONParser;
 import reactor.core.publisher.Mono;
 import fr.kragwu.muscletracker.userapi.utils.RegistrationJSONParser;
 
-@CrossOrigin(origins = {"http://localhost:3030", "http://192.168.1.6:3030"})
+@CrossOrigin(origins = {"http://localhost:3030", "http://192.168.1.6:3030", "http://localhost:4200"})
 @RestController
 public class UserController {
 
@@ -64,12 +65,12 @@ public class UserController {
                     return sessionDTO;
                 }
             )
-            .map(sessionDTO -> sessionDTO.getId().isEmpty() ? ResponseEntity.status(400).body(null) :
+            .map(sessionDTO -> sessionDTO.getId().isEmpty() ? ResponseEntity.status(401).body(null) :
                  ResponseEntity.status(200).body(sessionDTO));
     }
 
     @PostMapping(value = "/register")
-    public Mono<ResponseEntity<String>> register(@Validated @RequestBody RegistrationDTO payload) {
+    public Mono<ResponseEntity<StatusDTO>> register(@Validated @RequestBody RegistrationDTO payload) {
         return Mono.just(payload)
             .map(it -> {
                 System.out.println("Register User : " + it);
@@ -83,12 +84,12 @@ public class UserController {
                 userBO.setRegistrationDate(LocalDate.now());
                 return userBO;
             })
-            .map(userBO -> userService.registerUser(userBO) ? ResponseEntity.status(201).body("OK") :
-                ResponseEntity.status(400).body("KO"));
+            .map(userBO -> userService.registerUser(userBO) ? ResponseEntity.status(201).body(new StatusDTO("OK")) :
+                ResponseEntity.status(400).body(null));
     }
 
     @PostMapping(value = "/logout")
-    public Mono<ResponseEntity<String>> logout(@Validated @RequestBody SessionDTO payload) {
+    public Mono<ResponseEntity<StatusDTO>> logout(@Validated @RequestBody SessionDTO payload) {
         return Mono.just(payload)
             .map(it -> {
                 System.out.println("Logout User : " + it.getId());
@@ -98,12 +99,12 @@ public class UserController {
             })
             .map(sessionDTO -> {
                 userService.logoutSession(sessionDTO);
-                return ResponseEntity.status(200).body("OK");
+                return ResponseEntity.status(200).body(new StatusDTO("OK"));
             });
     }
 
     @PostMapping(value = "/authorize")
-    public Mono<ResponseEntity<String>> authorize(@Validated @RequestBody SessionDTO payload) {
+    public Mono<ResponseEntity<StatusDTO>> authorize(@Validated @RequestBody SessionDTO payload) {
         return Mono.just(payload)
             .map(it -> {
                 System.out.println("Authorize User : " + it.getId());
@@ -112,7 +113,7 @@ public class UserController {
                 return sessionDTO;
             })
             .map(userService::authorize)
-            .map(optSessionDTO -> optSessionDTO.isPresent() ? ResponseEntity.status(200).body("OK") :
-                ResponseEntity.status(401).body("Unauthorized"));
+            .map(optSessionDTO -> optSessionDTO.isPresent() ? ResponseEntity.status(200).body(new StatusDTO("OK")) :
+                ResponseEntity.status(401).body(null));
     }
 }

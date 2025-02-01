@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../../../core/services/login.service';
+import { RegistrationDTO } from '../../../core/models/registrationdto';
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,16 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
-  login() {
-    if (this.username === 'admin' && this.password === 'password') {
-      // Ici, tu peux implémenter la logique de connexion (appel API, etc.)
-      alert('Connexion réussie !');
-      this.router.navigate(['/home']); // Exemple de redirection après connexion réussie
-    } else {
-      alert('Pseudo ou mot de passe incorrect');
-    }
+  login() {    
+    this.loginService.login(this.username, this.password).subscribe({
+      next: (session) => {
+        localStorage.setItem('token', session.token);
+        this.router.navigate(['/home']); // Exemple de redirection après connexion réussie
+      }, error: (error) => {
+        alert(error.message);
+      }});
   }
 
   redirectionRegister() {

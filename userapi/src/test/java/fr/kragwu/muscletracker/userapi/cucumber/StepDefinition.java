@@ -83,14 +83,14 @@ public class StepDefinition {
 
     @Then("received error message unknown user")
     public void receivedErrorUnknownUser() {
-        assertEquals(400, response.statusCode());
+        assertEquals(401, response.statusCode());
         assertEquals("", response.getBody().asString());
     }
 
     @Then("received succeed register")
     public void receivedSucceedRegister() {
         assertEquals(201, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
+        assertEquals("{\"message\":\"OK\"}", response.getBody().asString());
     }
 
     @Then("received succeed login")
@@ -109,24 +109,24 @@ public class StepDefinition {
     @Then("received failed register")
     public void receivedFailedRegister() {
         assertEquals(400, response.statusCode());
-        assertEquals("KO", response.getBody().asString());
+        assertEquals("", response.getBody().asString());
     }
 
     @Then("received succeed logout")
     public void receivedSucceedLogout() {
         assertEquals(200, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
+        assertEquals("{\"message\":\"OK\"}", response.getBody().asString());
     }
 
     @Then("received succeed authorization")
     public void receivedSucceedAuthorization() {
         assertEquals(200, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
+        assertEquals("{\"message\":\"OK\"}", response.getBody().asString());
     }
 
     @Then("received failed authorization")
     public void receivedFailedAuthorization() {
         assertEquals(401, response.statusCode());
-        assertEquals("Unauthorized", response.getBody().asString());
+        assertEquals("", response.getBody().asString());
     }
 }

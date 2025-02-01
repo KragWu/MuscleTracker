@@ -21,6 +21,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
+import fr.kragwu.muscletracker.userapi.controllers.dto.StatusDTO;
 import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 
@@ -90,7 +91,7 @@ class UserControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(body))
             .exchange()
-            .expectStatus().isBadRequest()
+            .expectStatus().isUnauthorized()
             .expectBody(SessionDTO.class).returnResult().getResponseBody();
 
         assertNull(responseBody);
@@ -130,17 +131,17 @@ class UserControllerTest {
         
         Mockito.when(service.registerUser(any())).thenReturn(true);
         
-        String responseBody = client.post()
+        StatusDTO responseBody = client.post()
         .uri("/register")
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(body))
         .exchange()
         .expectStatus().isCreated()
-        .expectBody(String.class).returnResult().getResponseBody();
+        .expectBody(StatusDTO.class).returnResult().getResponseBody();
         
         assertNotNull(responseBody);
-        assertEquals(responseBody, "OK");
+        assertEquals("OK", responseBody.getMessage());
         verify(service).registerUser(any());
     }
 
@@ -164,8 +165,7 @@ class UserControllerTest {
         .expectStatus().isBadRequest()
         .expectBody(String.class).returnResult().getResponseBody();
         
-        assertNotNull(responseBody);
-        assertEquals("KO", responseBody);
+        assertNull(responseBody);
         verify(service).registerUser(any());
     }
 
@@ -196,17 +196,17 @@ class UserControllerTest {
         
         Mockito.doNothing().when(service).logoutSession(any());
         
-        String responseBody = client.post()
+        StatusDTO responseBody = client.post()
         .uri("/logout")
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(body))
         .exchange()
         .expectStatus().isOk()
-        .expectBody(String.class).returnResult().getResponseBody();
+        .expectBody(StatusDTO.class).returnResult().getResponseBody();
         
         assertNotNull(responseBody);
-        assertEquals("OK", responseBody);
+        assertEquals("OK", responseBody.getMessage());
         verify(service).logoutSession(any());
     }
 
@@ -240,17 +240,17 @@ class UserControllerTest {
         
         Mockito.when(service.authorize(any())).thenReturn(Optional.of(sessionDTO));
         
-        String responseBody = client.post()
+        StatusDTO responseBody = client.post()
         .uri("/authorize")
         .accept(MediaType.APPLICATION_JSON)
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(body))
         .exchange()
         .expectStatus().isOk()
-        .expectBody(String.class).returnResult().getResponseBody();
+        .expectBody(StatusDTO.class).returnResult().getResponseBody();
         
         assertNotNull(responseBody);
-        assertEquals(responseBody, "OK");
+        assertEquals("OK", responseBody.getMessage());
         verify(service).authorize(any());
     }
 
@@ -271,8 +271,7 @@ class UserControllerTest {
         .expectStatus().isUnauthorized()
         .expectBody(String.class).returnResult().getResponseBody();
         
-        assertNotNull(responseBody);
-        assertEquals(responseBody, "Unauthorized");
+        assertNull(responseBody);
         verify(service).authorize(any());
     }
 

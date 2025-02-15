@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoginService } from './login.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { CipherService } from './cipher.service';
 import { SessionDTO } from '../models/sessiondto';
 import { RegistrationDTO } from '../models/registrationdto';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('LoginService', () => {
   let service: LoginService;
@@ -13,9 +14,9 @@ describe('LoginService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CipherService]
-    });
+    imports: [],
+    providers: [CipherService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(LoginService);
     httpMock = TestBed.inject(HttpTestingController);
     cipherService = TestBed.inject(CipherService);

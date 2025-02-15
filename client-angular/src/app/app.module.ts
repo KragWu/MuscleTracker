@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './core/services/login.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CipherService } from './core/services/cipher.service';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { CipherService } from './core/services/cipher.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [importProvidersFrom(HttpClientModule), {provide: LoginService}, {provide: CipherService}],
+  providers: [provideHttpClient(withInterceptorsFromDi()), {provide: LoginService}, {provide: CipherService}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

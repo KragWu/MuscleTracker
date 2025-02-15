@@ -19,7 +19,11 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the app', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have the title "Muscle Tracker"', () => {
+    expect(component.title).toBe('Muscle Tracker');
   });
 });

@@ -6,6 +6,7 @@ import { of, throwError } from 'rxjs';
 import { LoginService } from '../../../core/services/login.service';
 import { SessionDTO } from '../../../core/models/sessiondto';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 describe('RegisterComponent', () => {
   let registerComponent: RegisterComponent;
@@ -88,5 +89,30 @@ describe('RegisterComponent', () => {
   it('should navigate to /login on redirectionLogin', () => {
     registerComponent.redirectionLogin();
     expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  });
+
+  it('should render the form elements correctly', () => {
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1.title').textContent).toContain('Muscle Tracker');
+    expect(compiled.querySelector('label[for="username"]').textContent).toContain('Identifiant');
+    expect(compiled.querySelector('input#username')).toBeTruthy();
+    expect(compiled.querySelector('label[for="password"]').textContent).toContain('Mot de passe');
+    expect(compiled.querySelector('input#password')).toBeTruthy();
+    expect(compiled.querySelector('button[type="submit"]').textContent).toContain('Inscription');
+    expect(compiled.querySelector('a').textContent).toContain('Si déjà un compte, cliquez ici');
+  });
+
+  it('should call register method on form submit', () => {
+    spyOn(registerComponent, 'register');
+    const form = fixture.debugElement.query(By.css('form'));
+    form.triggerEventHandler('ngSubmit', null);
+    expect(registerComponent.register).toHaveBeenCalled();
+  });
+
+  it('should call redirectionLogin method on link click', () => {
+    spyOn(registerComponent, 'redirectionLogin');
+    const link = fixture.debugElement.query(By.css('a'));
+    link.triggerEventHandler('click', null);
+    expect(registerComponent.redirectionLogin).toHaveBeenCalled();
   });
 });

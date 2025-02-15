@@ -1,23 +1,74 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
+import { Router } from '@angular/router';
+import { of, throwError } from 'rxjs';
+import { LoginService } from '../../../core/services/login.service';
+import { SessionDTO } from '../../../core/models/sessiondto';
+import { FormsModule } from '@angular/forms';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
+  let loginComponent: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let router: jasmine.SpyObj<Router>;
+  let loginService: jasmine.SpyObj<LoginService>;
 
   beforeEach(async () => {
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const loginServiceSpy = jasmine.createSpyObj('LoginService', ['login']);
+
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      declarations: [LoginComponent],
+      imports: [FormsModule],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+        { provide: LoginService, useValue: loginServiceSpy }
+      ]
     })
     .compileComponents();
     
     fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
+    loginComponent = fixture.componentInstance;
+    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    loginService = TestBed.inject(LoginService) as jasmine.SpyObj<LoginService>;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(loginComponent).toBeTruthy();
+  });
+
+  it('should login successfully and navigate to /home', () => {
+    const token = 'test-token';
+    const session: SessionDTO = { id: "id", token: token };
+    loginService.login.and.returnValue(of(session));
+    spyOn(localStorage, 'setItem');
+
+    loginComponent.username = 'testuser';
+    loginComponent.password = 'testpassword';
+    loginComponent.login();
+
+    expect(loginService.login).toHaveBeenCalledWith('testuser', 'testpassword');
+    expect(localStorage.setItem).toHaveBeenCalledWith('token', token);
+    expect(router.navigate).toHaveBeenCalledWith(['/home']);
+  });
+
+  it('should show an alert on login failure', () => {
+    const errorMessage = 'Login failed';
+    const err = new Error(errorMessage);
+    loginService.login.and.returnValue(throwError(() => err));
+    spyOn(window, 'alert');
+
+    loginComponent.username = 'testuser';
+    loginComponent.password = 'testpassword';
+    loginComponent.login();
+
+    expect(loginService.login).toHaveBeenCalledWith('testuser', 'testpassword');
+    expect(window.alert).toHaveBeenCalledWith(errorMessage);
+  });
+
+  it('should navigate to /register on redirectionRegister', () => {
+    loginComponent.redirectionRegister();
+    expect(router.navigate).toHaveBeenCalledWith(['/register']);
   });
 });

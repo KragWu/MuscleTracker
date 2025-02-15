@@ -8,6 +8,9 @@ export class CipherService {
   constructor() { }
 
   public encrypt(data: string, key: string): string {
+    if (key.length === 0) {
+      throw new Error("Key cannot be empty");
+    }
     let cryptedPassword = ""
     for(let index = 0; index < data.length; index++) {
         let characterEncodeA = data.charCodeAt(index)
@@ -20,6 +23,9 @@ export class CipherService {
   }
 
   public decrypt(data: string, key: string): string {
+    if (key.length === 0) {
+      throw new Error("Key cannot be empty");
+    }
     let decryptedPassword = ""
     for(let index = 0; index < data.length; index++) {
         let characterDecodeA = data.charCodeAt(index)

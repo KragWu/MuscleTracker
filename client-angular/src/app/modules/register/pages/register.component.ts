@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../core/services/login.service';
-import { RegistrationDTO } from '../../../core/models/registrationdto';
 import { switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss', './../../../app.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss', './../../../app.component.scss'],
+    standalone: false
 })
 export class RegisterComponent {
   username: string = '';

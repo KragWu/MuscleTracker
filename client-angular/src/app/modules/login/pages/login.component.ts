@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../core/services/login.service';
-import { RegistrationDTO } from '../../../core/models/registrationdto';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', './../../../app.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss', './../../../app.component.scss'],
+    standalone: false
 })
 export class LoginComponent {
   username: string = '';

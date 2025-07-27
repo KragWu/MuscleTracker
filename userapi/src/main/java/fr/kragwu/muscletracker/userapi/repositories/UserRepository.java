@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 import fr.kragwu.muscletracker.userapi.repositories.entities.User;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, UUID> {
     Optional<User> findByLogin(String login);
 }

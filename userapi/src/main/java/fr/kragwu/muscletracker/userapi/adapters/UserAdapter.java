@@ -5,11 +5,16 @@ import fr.kragwu.muscletracker.userapi.repositories.entities.User;
 
 public class UserAdapter {
 
-    public static User transformDTOtoDAO(UserBO userBO) {
+    public static User transformBOtoDAO(UserBO userBO) {
         return new User(userBO.getId(), userBO.getLogin(), userBO.getPassword(), userBO.getRegistrationDate());
     }
 
-    public static UserBO transformDAOtoDTO(User user) {
-        return new UserBO(user.getId(), user.getLogin(), user.getPassword(), user.getRegistrationDate());
+    public static UserBO transformDAOtoBO(User user) {
+        return UserBO.builder()
+                .id(user.getId())
+                .login(user.getLogin())
+                .password(user.getPassword())
+                .registrationDate(user.getRegistrationDate())
+                .build();
     }
 }

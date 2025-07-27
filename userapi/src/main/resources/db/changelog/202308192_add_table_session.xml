@@ -2,10 +2,10 @@
     <!--Added the entity User-->
     <changeSet id="20230819-2" author="kragwu">
         <createTable tableName="session">
-            <column name="id" type="varchar(255)" >
+            <column name="id" type="uuid" >
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="id_user" type="varchar(255)">
+            <column name="id_user" type="uuid">
                 <constraints unique="true" nullable="false" />
             </column>
             <column name="login_date" type="timestamp(6)">

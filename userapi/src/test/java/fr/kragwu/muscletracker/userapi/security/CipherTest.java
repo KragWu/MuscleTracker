@@ -15,7 +15,7 @@ class CipherTest {
         String passwordGiven = "p45s-w0Rd";
         String passwordExpected = "¢dg§Z§a";
         System.out.println(now);
-        String passwordEncrypt = Cipher.encrypt(passwordGiven, now.toString());
+        String passwordEncrypt = MyCipher.encrypt(passwordGiven, now.toString());
         assertEquals(passwordExpected, passwordEncrypt);
     }
 
@@ -24,7 +24,7 @@ class CipherTest {
         String passwordGiven = "¢dg§Z§a";
         String passwordExpected = "p45s-w0Rd";
         System.out.println(now);
-        String passwordEncrypt = Cipher.decrypt(passwordGiven, now.toString());
+        String passwordEncrypt = MyCipher.decrypt(passwordGiven, now.toString());
         assertEquals(passwordExpected, passwordEncrypt);
     }
 }

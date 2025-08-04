@@ -96,7 +96,6 @@ public class UserService {
     public Optional<SessionBO> getSession(SessionBO sessionBO) {
         AtomicReference<Optional<SessionBO>> result = new AtomicReference<>(Optional.empty());
         if (sessionBO != null) {
-            log.info("SessionDTO : {}", sessionBO);
             if(sessionBO.getIdUser() != null) {
                 Optional<Session> optSession = sessionRepository.findByIdUser(sessionBO.getIdUser());
                 optSession.ifPresentOrElse(session -> result.set(Optional.of(SessionAdapter.transformDAOtoBO(session))),

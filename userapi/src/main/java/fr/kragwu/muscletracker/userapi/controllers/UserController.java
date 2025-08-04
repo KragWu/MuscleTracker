@@ -21,7 +21,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:3030", "http://192.168.1.6:3030", "http://localhost:4200"})
 @RestController
 public class UserController {
 

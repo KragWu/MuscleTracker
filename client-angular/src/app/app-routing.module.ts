@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule) },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
+  { path: 'logout', loadChildren: () => import('./modules/logout/logout.module').then(m => m.LogoutModule) },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

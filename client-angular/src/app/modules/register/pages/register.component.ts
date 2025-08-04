@@ -17,12 +17,19 @@ export class RegisterComponent {
 
   register() {
     this.loginService.register(this.username, this.password).pipe(
-      switchMap(() => this.loginService.login(this.username, this.password))
+      switchMap(() => this.loginService.login(this.username, this.password)),
+      switchMap((loginResponse) => {
+        const session = loginResponse.headers.get('session') || '';
+        localStorage.setItem('session', session);
+        return this.loginService.token(session);
+      })
     ).subscribe({
-      next: (session) => {
-        localStorage.setItem('token', session.token);
-        this.router.navigate(['/home']); // Exemple de redirection après connexion réussie
-      }, error: (error) => {
+      next: (tokenResponse) => {
+        const token = tokenResponse.headers.get('token') || '';
+        localStorage.setItem('token', token);
+        this.router.navigate(['/home']); // Redirection après inscription réussie
+      },
+      error: (error) => {
         alert(error.message);
       }
     });

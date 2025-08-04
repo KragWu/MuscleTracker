@@ -1,9 +1,10 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { SessionDTO } from '../models/sessiondto';
 import { RegistrationDTO } from '../models/registrationdto';
 import { CipherService } from './cipher.service';
+import { StatutDTO } from '../models/statutdto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +13,46 @@ export class LoginService {
 
   constructor(private http: HttpClient, private cipherService: CipherService) { }
 
-  public login(username: string, password: string): Observable<SessionDTO> {
+  public login(username: string, password: string): Observable<HttpResponse<StatutDTO>> {
     let currentDate = new Date();
     const strCurrentDate = currentDate.toISOString().split('T')[0]
     const cryptedLogin = this.cipherService.encrypt(username, strCurrentDate)
     const cryptedPassword = this.cipherService.encrypt(password, strCurrentDate)
 
     let registration: RegistrationDTO = {login: cryptedLogin, password: cryptedPassword}
-    return this.http.post<SessionDTO>('http://localhost:8080/login', registration).pipe(
+    return this.http.post<StatutDTO>('http://localhost:8080/login', registration, { observe: 'response' }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  public token(session: string): Observable<HttpResponse<StatutDTO>> {
+
+    let headers: HttpHeaders = new HttpHeaders({
+      'session': session
+    });
+    return this.http.get<StatutDTO>('http://localhost:8080/token', { headers: headers, observe: 'response' }).pipe(
+        catchError(this.handleError)
+    );
+  }
+
+  public register(username: string, password: string): Observable<StatutDTO> {
+    let currentDate = new Date();
+    const strCurrentDate = currentDate.toISOString().split('T')[0]
+    const cryptedLogin = this.cipherService.encrypt(username, strCurrentDate)
+    const cryptedPassword = this.cipherService.encrypt(password, strCurrentDate)
+
+    let registration: RegistrationDTO = {login: cryptedLogin, password: cryptedPassword}
+    return this.http.post<StatutDTO>('http://localhost:8080/register', registration).pipe(
       catchError(this.handleError)
     );
   }
 
-  public register(username: string, password: string): Observable<string> {
-    let currentDate = new Date();
-    const strCurrentDate = currentDate.toISOString().split('T')[0]
-    const cryptedLogin = this.cipherService.encrypt(username, strCurrentDate)
-    const cryptedPassword = this.cipherService.encrypt(password, strCurrentDate)
-
-    let registration: RegistrationDTO = {login: cryptedLogin, password: cryptedPassword}
-    return this.http.post<string>('http://localhost:8080/register', registration).pipe(
+  public logout(session: string, token: string): Observable<void> {
+    let headers: HttpHeaders = new HttpHeaders({
+      'session': session,
+      'token': token
+    });
+    return this.http.post<void>('http://localhost:8080/logout', {}, {headers: headers}).pipe(
       catchError(this.handleError)
     );
   }

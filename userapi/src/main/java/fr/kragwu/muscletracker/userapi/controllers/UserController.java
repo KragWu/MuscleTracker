@@ -129,7 +129,7 @@ public class UserController {
                 });
     }
 
-    @PostMapping(value = "/authorize")
+    @GetMapping(value = "/authorize")
     public Mono<ResponseEntity<StatusDTO>> authorize(@RequestHeader(value = "session") String sessionHeader,
                                                      @RequestHeader(value = "token") String tokenHeader) {
         return Mono.just(SessionDTO.builder().id(sessionHeader).token(tokenHeader).build())

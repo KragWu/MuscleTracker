@@ -1,8 +1,6 @@
 package fr.kragwu.muscletracker.userapi.controllers;
 
-import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
 import fr.kragwu.muscletracker.userapi.controllers.dto.StatusDTO;
-import fr.kragwu.muscletracker.userapi.security.MyCipher;
 import fr.kragwu.muscletracker.userapi.services.UserService;
 import fr.kragwu.muscletracker.userapi.services.bo.SessionBO;
 import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
@@ -233,10 +231,9 @@ class UserControllerTest {
 
         Mockito.when(service.authorize(any())).thenReturn(Optional.of(sessionBO));
 
-        StatusDTO responseBody = client.post()
+        StatusDTO responseBody = client.get()
                 .uri("/authorize")
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
                 .header("session", idSessionSecret)
                 .header("token", tokenSession)
                 .exchange()
@@ -299,10 +296,9 @@ class UserControllerTest {
 
         Mockito.when(service.authorize(any())).thenReturn(Optional.empty());
 
-        StatusDTO responseBody = client.post()
+        StatusDTO responseBody = client.get()
                 .uri("/authorize")
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
                 .header("session", idSession)
                 .header("token", tokenSession)
                 .exchange()
@@ -316,15 +312,9 @@ class UserControllerTest {
 
     @Test
     void authorize_bad_format() {
-        String idSession = UUID.randomUUID().toString();
-        String tokenSession = UUID.randomUUID().toString();
-        String body = String.format("{ \"id\": \"%s\", \"ton\": \"%s\" }", idSession, tokenSession);
-
-        StatusDTO responseBody = client.post()
+        StatusDTO responseBody = client.get()
                 .uri("/authorize")
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(body))
                 .exchange()
                 .expectStatus().isBadRequest()
                 .expectBody(StatusDTO.class).returnResult().getResponseBody();

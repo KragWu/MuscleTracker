@@ -96,7 +96,7 @@ public class StepDefinition {
                 .header("session", sessionId)
                 .header("token", sessionToken)
                 .when()
-                .post("/authorize");
+                .get("/authorize");
     }
 
     @When("Try to get token")

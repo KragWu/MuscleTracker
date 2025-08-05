@@ -57,6 +57,17 @@ export class LoginService {
     );
   }
 
+  public authorized(session: string, token: string): Observable<HttpResponse<StatutDTO>> {
+    const headers: HttpHeaders = new HttpHeaders({
+      'session': session,
+      'token': token
+    });
+    return this.http.get<StatutDTO>('http://localhost:8080/authorize', { headers: headers, observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let message: string = '';
     if (error.status === 0) {

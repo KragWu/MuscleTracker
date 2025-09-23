@@ -6,7 +6,7 @@ import { LoginService } from '../../../core/services/login.service';
   selector: 'app-logout',
   standalone: false,
   templateUrl: './logout.component.html',
-  styleUrls: ['./login.component.scss', './../../../app.component.scss'],
+  styleUrls: ['./logout.component.scss', './../../../app.component.scss'],
 })
 export class LogoutComponent {
 

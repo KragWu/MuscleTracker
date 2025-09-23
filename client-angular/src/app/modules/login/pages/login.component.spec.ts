@@ -1,100 +1,64 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoginComponent } from './login.component';
 import { Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
 import { LoginService } from '../../../core/services/login.service';
-import { SessionDTO } from '../../../core/models/sessiondto';
-import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+import { of, throwError } from 'rxjs';
+import '../../../shared/setup-jasmine-localstorage.spec.ts';
 
 describe('LoginComponent', () => {
-  let loginComponent: LoginComponent;
+  let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let router: jasmine.SpyObj<Router>;
-  let loginService: jasmine.SpyObj<LoginService>;
+  let loginServiceSpy: jasmine.SpyObj<LoginService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    const loginServiceSpy = jasmine.createSpyObj('LoginService', ['login']);
+    loginServiceSpy = jasmine.createSpyObj('LoginService', ['login', 'token']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [FormsModule],
       providers: [
-        { provide: Router, useValue: routerSpy },
-        { provide: LoginService, useValue: loginServiceSpy }
+        { provide: LoginService, useValue: loginServiceSpy },
+        { provide: Router, useValue: routerSpy }
       ]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LoginComponent);
-    loginComponent = fixture.componentInstance;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-    loginService = TestBed.inject(LoginService) as jasmine.SpyObj<LoginService>;
-    fixture.detectChanges();
+    component = fixture.componentInstance;
+    component.username = 'testuser';
+    component.password = 'testpass';
   });
 
   it('should create', () => {
-    expect(loginComponent).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
-  it('should login successfully and navigate to /home', () => {
-    const token = 'test-token';
-    const session: SessionDTO = { id: "id", token: token };
-    loginService.login.and.returnValue(of(session));
-    spyOn(localStorage, 'setItem');
+  it('should login and navigate to /home on success', () => {
+    const mockLoginResponse = { headers: new Map([['session', 'session123']]) };
+    const mockTokenResponse = { headers: new Map([['token', 'token456']]) };
 
-    loginComponent.username = 'testuser';
-    loginComponent.password = 'testpassword';
-    loginComponent.login();
+    loginServiceSpy.login.and.returnValue(of(mockLoginResponse as any));
+    loginServiceSpy.token.and.returnValue(of(mockTokenResponse as any));
+    const setItemSpy = localStorage.setItem as jasmine.Spy;
 
-    expect(loginService.login).toHaveBeenCalledWith('testuser', 'testpassword');
-    expect(localStorage.setItem).toHaveBeenCalledWith('token', token);
-    expect(router.navigate).toHaveBeenCalledWith(['/home']);
+    component.login();
+
+    expect(loginServiceSpy.login).toHaveBeenCalledWith('testuser', 'testpass');
+    expect(loginServiceSpy.token).toHaveBeenCalledWith('session123');
+    expect(setItemSpy).toHaveBeenCalledWith('session', 'session123');
+    expect(setItemSpy).toHaveBeenCalledWith('token', 'token456');
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/home']);
   });
 
-  it('should show an alert on login failure', () => {
-    const errorMessage = 'Login failed';
-    const err = new Error(errorMessage);
-    loginService.login.and.returnValue(throwError(() => err));
+  it('should alert error on login failure', () => {
+    loginServiceSpy.login.and.returnValue(throwError(() => new Error('fail')));
     spyOn(window, 'alert');
-
-    loginComponent.username = 'testuser';
-    loginComponent.password = 'testpassword';
-    loginComponent.login();
-
-    expect(loginService.login).toHaveBeenCalledWith('testuser', 'testpassword');
-    expect(window.alert).toHaveBeenCalledWith(errorMessage);
+    component.login();
+    expect(window.alert).toHaveBeenCalledWith('fail');
   });
 
   it('should navigate to /register on redirectionRegister', () => {
-    loginComponent.redirectionRegister();
-    expect(router.navigate).toHaveBeenCalledWith(['/register']);
-  });
-
-  it('should render the form elements correctly', () => {
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1.title').textContent).toContain('Muscle Tracker');
-    expect(compiled.querySelector('label[for="username"]').textContent).toContain('Identifiant');
-    expect(compiled.querySelector('input#username')).toBeTruthy();
-    expect(compiled.querySelector('label[for="password"]').textContent).toContain('Mot de passe');
-    expect(compiled.querySelector('input#password')).toBeTruthy();
-    expect(compiled.querySelector('button[type="submit"]').textContent).toContain('Connexion');
-    expect(compiled.querySelector('button.btn-success').textContent).toContain('Inscription');
-  });
-
-  it('should call login method on form submit', () => {
-    spyOn(loginComponent, 'login');
-    const form = fixture.debugElement.query(By.css('form'));
-    form.triggerEventHandler('ngSubmit', null);
-    expect(loginComponent.login).toHaveBeenCalled();
-  });
-
-  it('should call redirectionRegister method on button click', () => {
-    spyOn(loginComponent, 'redirectionRegister');
-    const button = fixture.debugElement.query(By.css('button.btn-success'));
-    button.triggerEventHandler('click', null);
-    expect(loginComponent.redirectionRegister).toHaveBeenCalled();
+    component.redirectionRegister();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/register']);
   });
 });

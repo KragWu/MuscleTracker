@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { SessionDTO } from '../models/sessiondto';
 import { RegistrationDTO } from '../models/registrationdto';
 import { CipherService } from './cipher.service';
 import { StatutDTO } from '../models/statutdto';
@@ -47,12 +46,12 @@ export class LoginService {
     );
   }
 
-  public logout(session: string, token: string): Observable<void> {
+  public logout(session: string, token: string): Observable<StatutDTO> {
     let headers: HttpHeaders = new HttpHeaders({
       'session': session,
       'token': token
     });
-    return this.http.post<void>('http://localhost:8080/logout', {}, {headers: headers}).pipe(
+    return this.http.post<StatutDTO>('http://localhost:8080/logout', {}, {headers: headers}).pipe(
       catchError(this.handleError)
     );
   }

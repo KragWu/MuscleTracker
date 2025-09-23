@@ -1,25 +1,28 @@
 import { TestBed } from '@angular/core/testing';
-
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { LoginService } from './login.service';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { CipherService } from './cipher.service';
-import { SessionDTO } from '../models/sessiondto';
 import { RegistrationDTO } from '../models/registrationdto';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { StatutDTO } from '../models/statutdto';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('LoginService', () => {
   let service: LoginService;
   let httpMock: HttpTestingController;
-  let cipherService: CipherService;
+  let cipherSpy: jasmine.SpyObj<CipherService>;
 
   beforeEach(() => {
+    cipherSpy = jasmine.createSpyObj('CipherService', ['encrypt']);
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [CipherService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: CipherService, useValue: cipherSpy }
+      ]
+    });
     service = TestBed.inject(LoginService);
     httpMock = TestBed.inject(HttpTestingController);
-    cipherService = TestBed.inject(CipherService);
   });
 
   afterEach(() => {
@@ -30,94 +33,89 @@ describe('LoginService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should login successfully', () => {
-    const username = 'testuser';
-    const password = 'testpassword';
-    const token = 'test-token';
-    const sessionDTO: SessionDTO = { id: "id", token: token };
-    const encryptedUsername = 'encrypted-username';
-    const encryptedPassword = 'encrypted-password';
-
-    spyOn(cipherService, 'encrypt').and.callFake((value: string) => {
-      if (value === username) return encryptedUsername;
-      if (value === password) return encryptedPassword;
-      return value;
-    });
-
-    service.login(username, password).subscribe((response) => {
-      expect(response).toEqual(sessionDTO);
+  it('should call login and encrypt credentials', () => {
+    cipherSpy.encrypt.and.returnValue('crypted');
+    service.login('user', 'pass').subscribe(response => {
+      expect(response.body).toEqual({ message: 'ok' } as StatutDTO);
     });
 
     const req = httpMock.expectOne('http://localhost:8080/login');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ login: encryptedUsername, password: encryptedPassword });
-    req.flush(sessionDTO);
+    expect(req.request.body).toEqual({ login: 'crypted', password: 'crypted' } as RegistrationDTO);
+
+    req.flush({ message: 'ok' }, { status: 200, statusText: 'OK' });
   });
 
-  it('should handle login error', () => {
-    const username = 'testuser';
-    const password = 'testpassword';
-    const encryptedUsername = 'encrypted-username';
-    const encryptedPassword = 'encrypted-password';
-    const errorMessage = 'Invalid credentials';
-
-    spyOn(cipherService, 'encrypt').and.callFake((value: string) => {
-      if (value === username) return encryptedUsername;
-      if (value === password) return encryptedPassword;
-      return value;
+  it('should call token with session header', () => {
+    service.token('session123').subscribe(response => {
+      expect(response.body).toEqual({ message: 'ok' } as StatutDTO);
     });
 
-    service.login(username, password).subscribe({
-      next: () => fail('expected an error, not a session'),
-      error: (error) => expect(error.message).toContain(errorMessage)
-    });
-
-    const req = httpMock.expectOne('http://localhost:8080/login');
-    req.flush({ message: errorMessage }, { status: 401, statusText: 'Unauthorized' });
+    const req = httpMock.expectOne('http://localhost:8080/token');
+    expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('session')).toBe('session123');
+    req.flush({ message: 'ok' }, { status: 200, statusText: 'OK' });
   });
 
-  it('should register successfully', () => {
-    const username = 'testuser';
-    const password = 'testpassword';
-    const responseMessage = 'Registration successful';
-    const encryptedUsername = 'encrypted-username';
-    const encryptedPassword = 'encrypted-password';
-
-    spyOn(cipherService, 'encrypt').and.callFake((value: string) => {
-      if (value === username) return encryptedUsername;
-      if (value === password) return encryptedPassword;
-      return value;
-    });
-
-    service.register(username, password).subscribe((response) => {
-      expect(response).toEqual(responseMessage);
+  it('should call register and encrypt credentials', () => {
+    cipherSpy.encrypt.and.returnValue('crypted');
+    service.register('user', 'pass').subscribe(response => {
+      expect(response).toEqual({ message: 'ok' } as StatutDTO);
     });
 
     const req = httpMock.expectOne('http://localhost:8080/register');
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual({ login: encryptedUsername, password: encryptedPassword });
-    req.flush(responseMessage);
+    expect(req.request.body).toEqual({ login: 'crypted', password: 'crypted' } as RegistrationDTO);
+    req.flush({ message: 'ok' });
   });
 
-  it('should handle register error', () => {
-    const username = 'testuser';
-    const password = 'testpassword';
-    const encryptedUsername = 'encrypted-username';
-    const encryptedPassword = 'encrypted-password';
-    const errorMessage = 'Service unavailable, please retry later.';
-
-    spyOn(cipherService, 'encrypt').and.callFake((value: string) => {
-      if (value === username) return encryptedUsername;
-      if (value === password) return encryptedPassword;
-      return value;
+  it('should call logout with session and token headers', () => {
+    service.logout('session123', 'token456').subscribe(response => {
+      expect(response).toEqual({ message: 'ok' } as StatutDTO);
     });
 
-    service.register(username, password).subscribe({
-      next: () => fail('expected an error, not a success message'),
-      error: (error) => expect(error.message).toContain(errorMessage)
+    const req = httpMock.expectOne('http://localhost:8080/logout');
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('session')).toBe('session123');
+    expect(req.request.headers.get('token')).toBe('token456');
+    req.flush({ message: 'ok' });
+  });
+
+  it('should call authorized with session and token headers', () => {
+    service.authorized('session123', 'token456').subscribe(response => {
+      expect(response.body).toEqual({ message: 'ok' } as StatutDTO);
     });
 
-    const req = httpMock.expectOne('http://localhost:8080/register');
-    req.flush({ message: errorMessage }, { status: 503, statusText: 'Service Unavailable' });
+    const req = httpMock.expectOne('http://localhost:8080/authorize');
+    expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('session')).toBe('session123');
+    expect(req.request.headers.get('token')).toBe('token456');
+    req.flush({ message: 'ok' }, { status: 200, statusText: 'OK' });
+  });
+
+  it('should handle 401 error in login', (done) => {
+    cipherSpy.encrypt.and.returnValue('crypted');
+    service.login('user', 'pass').subscribe({
+      error: (err) => {
+        expect(err.message).toContain('Invalid credentials');
+        done();
+      }
+    });
+
+    const req = httpMock.expectOne('http://localhost:8080/login');
+    req.flush({}, { status: 401, statusText: 'Unauthorized' });
+  });
+
+  it('should handle 500 error in login', (done) => {
+    cipherSpy.encrypt.and.returnValue('crypted');
+    service.login('user', 'pass').subscribe({
+      error: (err) => {
+        expect(err.message).toBe('Service unavailable, please retry later.');
+        done();
+      }
+    });
+
+    const req = httpMock.expectOne('http://localhost:8080/login');
+    req.flush({}, { status: 500, statusText: 'Server Error' });
   });
 });

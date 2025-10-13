@@ -1,0 +1,25 @@
+{
+  "name": "muscletracker",
+  "version": "1.0.0",
+  "description": "Application to prepare and store your bodybuilding activities",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KragWu/MuscleTracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KragWu/MuscleTracker/issues"
+  },
+  "homepage": "https://github.com/KragWu/MuscleTracker#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2"
+  }
+}

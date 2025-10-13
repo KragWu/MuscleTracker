@@ -1,7 +1,5 @@
 package fr.kragwu.muscletracker.userapi.cucumber;
 
-import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
-
 import fr.kragwu.muscletracker.userapi.controllers.dto.RegistrationDTO;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,23 +8,29 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import java.time.LocalDateTime;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class StepDefinition {
 
     String login;
     String password;
     RegistrationDTO registrationDTO;
-    SessionDTO sessionDTO;
     Response response;
+    String sessionId;
+    String sessionToken;
+
+    @Given("A User")
+    public void aUser(String strLogin, String strPassword) {
+        login = strLogin;
+        password = strPassword;
+        sessionId = "";
+        sessionToken = "";
+        registrationDTO = new RegistrationDTO(login, password);
+    }
 
     @Given("A new User")
     public void aNewUser() {
-        login = "test";
-        password = "password";
-        registrationDTO = new RegistrationDTO(login, password);
+        aUser("nouveau", "utilisateur");
     }
 
     @Given("A user already registered")
@@ -34,15 +38,27 @@ public class StepDefinition {
         aNewUser();
     }
 
-    @Given("A user already login")
-    public void aUserAlreadyLogin() {
-        aNewUser();
-        tryConnectFirstTime();
-        receivedSucceedLogin();
+    @Given("A user already registered but bad password")
+    public void aUserAlreadyRegisteredButBadPassword() {
+        aUser("nouveau", "erreur");
     }
 
-    @When("Try to connect")
-    public void tryConnectFirstTime() {
+    @Given("A user already login")
+    public void aUserAlreadyLogin() {
+        aUserAlreadyRegistered();
+        tryLoginFirstTime();
+        receivedSuccessLogin();
+    }
+
+    @Given("A user already get token")
+    public void aUserAlreadyGetToken() {
+        aUserAlreadyLogin();
+        tryToGetToken();
+        receivedSuccessTokenization();
+    }
+
+    @When("Try to login")
+    public void tryLoginFirstTime() {
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
@@ -66,7 +82,8 @@ public class StepDefinition {
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body(sessionDTO)
+                .header("session", sessionId)
+                .header("token", sessionToken)
                 .when()
                 .post("/logout");
     }
@@ -76,57 +93,75 @@ public class StepDefinition {
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body(sessionDTO)
+                .header("session", sessionId)
+                .header("token", sessionToken)
                 .when()
-                .post("/authorize");
+                .get("/authorize");
+    }
+
+    @When("Try to get token")
+    public void tryToGetToken() {
+        response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("session", sessionId)
+                .when()
+                .get("/token");
     }
 
     @Then("received error message unknown user")
     public void receivedErrorUnknownUser() {
-        assertEquals(400, response.statusCode());
-        assertEquals("", response.getBody().asString());
-    }
-
-    @Then("received succeed register")
-    public void receivedSucceedRegister() {
-        assertEquals(201, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
-    }
-
-    @Then("received succeed login")
-    public void receivedSucceedLogin() {
-        assertEquals(200, response.statusCode());
-        assertNotEquals("", response.getBody().asString());
-        sessionDTO = new SessionDTO(
-                response.jsonPath().get("id") == null ? null : response.jsonPath().get("id"),
-                response.jsonPath().get("idUser") == null ? null : response.jsonPath().get("idUser"),
-                response.jsonPath().get("loginDateTime") == null ? null : LocalDateTime.parse(response.jsonPath().get("loginDateTime")),
-                response.jsonPath().get("logoutDateTime") == null ? null : LocalDateTime.parse(response.jsonPath().get("logoutDateTime")),
-                response.jsonPath().get("token") == null ? null : response.jsonPath().get("token"));
-    }
-
-
-    @Then("received failed register")
-    public void receivedFailedRegister() {
-        assertEquals(400, response.statusCode());
-        assertEquals("KO", response.getBody().asString());
-    }
-
-    @Then("received succeed logout")
-    public void receivedSucceedLogout() {
-        assertEquals(200, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
-    }
-
-    @Then("received succeed authorization")
-    public void receivedSucceedAuthorization() {
-        assertEquals(200, response.statusCode());
-        assertEquals("OK", response.getBody().asString());
-    }
-
-    @Then("received failed authorization")
-    public void receivedFailedAuthorization() {
         assertEquals(401, response.statusCode());
-        assertEquals("Unauthorized", response.getBody().asString());
+        assertEquals("{\"message\":\"Login failed\"}", response.getBody().asString());
+    }
+
+    @Then("received success register")
+    public void receivedSuccessRegister() {
+        assertEquals(201, response.statusCode());
+        assertEquals("{\"message\":\"Registration succeed\"}", response.getBody().asString());
+    }
+
+    @Then("received success login")
+    public void receivedSuccessLogin() {
+        assertEquals(200, response.statusCode());
+        assertEquals("{\"message\":\"Login succeed\"}", response.getBody().asString());
+        sessionId = response.getHeader("session") == null ? null : response.getHeader("session");
+    }
+
+    @Then("received success tokenization")
+    public void receivedSuccessTokenization() {
+        assertEquals(200, response.statusCode());
+        assertEquals("{\"message\":\"Tokenization succeed\"}", response.getBody().asString());
+        sessionToken = response.getHeader("token") == null ? null : response.getHeader("token");
+    }
+
+    @Then("received failure tokenization")
+    public void receivedFailureTokenization() {
+        assertEquals(401, response.statusCode());
+        assertEquals("{\"message\":\"Tokenization failed\"}", response.getBody().asString());
+    }
+
+    @Then("received failure register")
+    public void receivedFailureRegister() {
+        assertEquals(400, response.statusCode());
+        assertEquals("{\"message\":\"Registration failed\"}", response.getBody().asString());
+    }
+
+    @Then("received success logout")
+    public void receivedSuccessLogout() {
+        assertEquals(200, response.statusCode());
+        assertEquals("{\"message\":\"Logout succeed\"}", response.getBody().asString());
+    }
+
+    @Then("received success authorization")
+    public void receivedSuccessAuthorization() {
+        assertEquals(200, response.statusCode());
+        assertEquals("{\"message\":\"Authorization succeed\"}", response.getBody().asString());
+    }
+
+    @Then("received failure authorization")
+    public void receivedFailureAuthorization() {
+        assertEquals(401, response.statusCode());
+        assertEquals("{\"message\":\"Authorization failed\"}", response.getBody().asString());
     }
 }

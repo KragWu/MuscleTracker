@@ -4,18 +4,27 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "session", schema = "client")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Session {
 
     @Id
     @Column(name = "id", nullable = false)
-    String id;
+    UUID id;
     @Column(name = "idUser", nullable = false)
-    String idUser;
+    UUID idUser;
     @Column(name = "loginDate", nullable = false)
     LocalDateTime loginDateTime;
     @Column(name = "logoutDate")
@@ -23,67 +32,14 @@ public class Session {
     @Column(name = "token", nullable = false)
     String token;
 
-    public Session() {
-        super();
-    }
-
-    public Session(String id, String idUser, LocalDateTime loginDateTime, LocalDateTime logoutDateTime, String token) {
-        super();
-        this.id = id;
-        this.idUser = idUser;
-        this.loginDateTime = loginDateTime;
-        this.logoutDateTime = logoutDateTime;
-        this.token = token;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    public String getIdUser() {
-        return this.idUser;
-    }
-
-    public void setLoginDateTime(LocalDateTime loginDateTime) {
-        this.loginDateTime = loginDateTime;
-    }
-
-    public LocalDateTime getLoginDateTime() {
-        return this.loginDateTime;
-    }
-
-    public void setLogoutDateTime(LocalDateTime logoutDateTime) {
-        this.logoutDateTime = logoutDateTime;
-    }
-
-    public LocalDateTime getLogoutDateTime() {
-        return this.logoutDateTime;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return this.token;
-    }
-
     public Session update(Session session) {
         Session result = new Session();
-        if (session.getId() == null || session.getId().isEmpty()) {
+        if (session.getId() == null) {
             result.setId(this.id);
         } else {
             result.setId(session.getId());
         }
-        if (session.getIdUser() == null || session.getIdUser().isEmpty()) {
+        if (session.getIdUser() == null) {
             result.setIdUser(this.idUser);
         } else {
             result.setIdUser(session.getIdUser());

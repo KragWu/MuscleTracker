@@ -1,0 +1,17 @@
+<div class="container text-center">
+  <div class="row mb-4">
+    <h1 class="title">Muscle Tracker</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-12 m-auto">
+      <form (ngSubmit)="register()">
+        <label class="form-label mb-2" for="username">Identifiant</label>
+        <input class="form-control mb-2" name="username" type="text" id="username" [(ngModel)]="username" placeholder="Entrez votre pseudo" required/>
+        <label class="form-label mb-2" for="password">Mot de passe</label>
+        <input class="form-control mb-2" name="password" type="password" id="password" [(ngModel)]="password" placeholder="Entrez votre mot de passe" required/>
+        <button type="submit" class="btn btn-success">Inscription</button>
+      </form>
+      <a (click)="redirectionLogin()">Si déjà un compte, cliquez ici</a>
+    </div>
+  </div>
+</div>

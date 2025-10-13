@@ -36,4 +36,30 @@ export class CipherService {
     }
     return decryptedPassword;
   }
+
+  public encryptHex(password: string, secretKey: string): string {
+    if (!secretKey) throw new Error('Key cannot be empty');
+    const passwordBytes = new TextEncoder().encode(password);
+    const keyBytes = new TextEncoder().encode(secretKey);
+    const result = new Uint8Array(passwordBytes.length);
+
+    for (let i = 0; i < passwordBytes.length; i++) {
+      result[i] = passwordBytes[i] ^ keyBytes[i % keyBytes.length];
+    }
+    // Encode en base64 pour un header HTTP safe
+    return btoa(String.fromCharCode(...result));
+  }
+
+  public decryptHex(cryptedPassword: string, secretKey: string): string {
+    if (!secretKey) throw new Error('Key cannot be empty');
+    const cryptedStr = atob(cryptedPassword);
+    const cryptedBytes = Uint8Array.from(cryptedStr, c => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(secretKey);
+    const result = new Uint8Array(cryptedBytes.length);
+
+    for (let i = 0; i < cryptedBytes.length; i++) {
+      result[i] = cryptedBytes[i] ^ keyBytes[i % keyBytes.length];
+    }
+    return new TextDecoder().decode(result);
+  }
 }

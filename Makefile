@@ -38,3 +38,6 @@ start-bdd:
 
 stop-bdd:
 	podman container stop bdd-muscletracker
+
+start-mock:
+	cd wiremock-config/ && java -jar wiremock-standalone.jar --port 8080 --verbose --root-dir .

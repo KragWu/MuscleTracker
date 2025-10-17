@@ -1,0 +1,154 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "OPTIONS",
+                "url": "/login"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "url": "/login"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "OPTIONS",
+                "url": "/register"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "url": "/register"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "OPTIONS",
+                "url": "/authorize"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "url": "/authorize"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "OPTIONS",
+                "url": "/token"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "GET",
+                "url": "/token"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "OPTIONS",
+                "url": "/logout"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "url": "/logout"
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization, session, token",
+                    "Access-Control-Max-Age": "86400"
+                }
+            }
+        }
+    ]
+}

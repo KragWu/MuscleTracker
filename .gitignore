@@ -215,3 +215,7 @@ Thumbs.db
 */blob-report/
 */playwright/.cache/
 */playwright/.auth/
+
+# Wiremock
+wiremock-config/__files
+*/wiremock-standalone*.jar

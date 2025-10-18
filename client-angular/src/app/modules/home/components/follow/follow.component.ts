@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './follow.component.html',
   styleUrl: './follow.component.scss'
 })
-export class FollowComponent {
-
-}
+export class FollowComponent {}

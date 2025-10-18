@@ -40,7 +40,7 @@ CREATE SCHEMA IF NOT EXISTS "<nom du schema pour l'API>";
 
 ### Angular
 
-You can start a mock with wiremock, you need to get the JAR file Wiremock-Standalone, use this link (version 3.13.1 - 17/10/2025):
+You can start a mock with Wiremock, you need to get the JAR file Wiremock-Standalone, use this link (version 3.13.1 - 17/10/2025):
 https://repo1.maven.org/maven2/org/wiremock/wiremock-standalone/3.13.1/wiremock-standalone-3.13.1.jar
 
 Place the JAR in the folder `wiremock-config` and remove the version in the filename.

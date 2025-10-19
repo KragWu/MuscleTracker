@@ -1,13 +1,35 @@
-<div class="container text-center">
+<div class="text-center">
     <div class="row block-title-home">
-        <p class="title-home">Muscle Tracker</p>
+        <h1 class="title-home">Muscle Tracker</h1>
         <p class="submenu-home">
             <a class="submenu-item" routerLink="/home">Profile</a>
             <a class="submenu-item" routerLink="/logout">Logout</a>
         </p>
-        <hr>
+        <hr class="hr-header">
+        <!-- Tabs / boutons responsive -->
+        <div class="w-100 menu-subheader">
+          <!-- Desktop / tablette : onglets -->
+          <ul class="nav nav-tabs justify-content-center d-none d-md-flex">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/home/prepare" routerLinkActive="active">Prepare Session</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/home/follow" routerLinkActive="active">Follow-up Session</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/home/plan" routerLinkActive="active">Plan Session</a>
+            </li>
+          </ul>
+
+          <!-- Mobile : boutons empilés -->
+          <div class="menu-subheader d-flex flex-column align-items-center d-md-none mt-2">
+            <a class="btn-subheader btn btn-outline-primary mb-2 w-75" routerLink="/home/prepare" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Prepare Session</a>
+            <a class="btn-subheader btn btn-outline-primary mb-2 w-75" routerLink="/home/follow" routerLinkActive="active">Follow-up Session</a>
+            <a class="btn-subheader btn btn-outline-primary w-75" routerLink="/home/plan" routerLinkActive="active">Plan Session</a>
+          </div>
+        </div>
     </div>
     <div class="row mb-4">
-        <p>home works!</p>
+        <router-outlet></router-outlet>
     </div>
 </div>

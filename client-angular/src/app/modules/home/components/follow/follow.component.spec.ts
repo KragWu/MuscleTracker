@@ -20,4 +20,12 @@ describe('FollowComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('title element', () => {
+    it('should display the title "follow works!"', () => {
+      const compiled = fixture.nativeElement as HTMLElement;
+      const titleElement = compiled.querySelector('h2');
+      expect(titleElement?.textContent).toBe('follow works!');
+    });
+  });
 });

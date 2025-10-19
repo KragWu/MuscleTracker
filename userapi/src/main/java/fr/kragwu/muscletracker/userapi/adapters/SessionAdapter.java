@@ -2,12 +2,10 @@ package fr.kragwu.muscletracker.userapi.adapters;
 
 import fr.kragwu.muscletracker.userapi.controllers.dto.SessionDTO;
 import fr.kragwu.muscletracker.userapi.repositories.entities.Session;
-import fr.kragwu.muscletracker.userapi.security.MyCipher;
 import fr.kragwu.muscletracker.userapi.services.bo.SessionBO;
 import io.micrometer.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Slf4j

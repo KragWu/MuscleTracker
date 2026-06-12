@@ -41,3 +41,10 @@ stop-bdd:
 
 start-mock:
 	cd wiremock-config/ && java -jar wiremock-standalone.jar --port 8080 --verbose --root-dir .
+
+start-keycloak:
+	podman run --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -p 8081:8080 -d quay.io/keycloak/keycloak:21.1.1 start-dev
+
+stop-keycloak:
+	podman container stop keycloak || true
+	podman container rm keycloak || true

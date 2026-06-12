@@ -1,38 +1,29 @@
 package fr.kragwu.muscletracker.userapi.controllers;
 
-import fr.kragwu.muscletracker.userapi.controllers.dto.StatusDTO;
 import fr.kragwu.muscletracker.userapi.services.UserService;
-import fr.kragwu.muscletracker.userapi.services.bo.SessionBO;
-import fr.kragwu.muscletracker.userapi.services.bo.UserBO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.BodyInserters;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.util.Optional;
-import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 @ActiveProfiles("test")
 class UserControllerTest {
-
-    private UserService service;
 
     private WebTestClient client;
 
     @BeforeEach
     void setUp() {
-        service = mock(UserService.class);
+        UserService service = mock(UserService.class);
         UserController controller = new UserController(service);
-        client = WebTestClient.bindToController(controller).configureClient().responseTimeout(Duration.ofMinutes(1)).build();
+        client = WebTestClient.bindToController(controller)
+                .configureClient()
+                .responseTimeout(Duration.ofMinutes(1))
+                .build();
     }
 
     @Test
@@ -41,13 +32,11 @@ class UserControllerTest {
                 .uri("/")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(String.class).returnResult().getResponseBody();
+                .expectBody(String.class)
+                .returnResult().getResponseBody();
         assertEquals("API User started", responseBody);
     }
-
-
-    @Test
-    void login_succeed() {
+}
         String login = "user";
         String password = "m0t2p45Se";
         UUID id = UUID.randomUUID();

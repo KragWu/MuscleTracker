@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../../core/services/login.service';
+import { KeycloakService } from '../../../core/services/keycloak.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,21 +10,11 @@ import { LoginService } from '../../../core/services/login.service';
 })
 export class LogoutComponent {
 
-  constructor(private router: Router, private loginService: LoginService) {
-    // Logique de déconnexion si nécessaire
-    const session = localStorage.getItem('session') || '';
-    const token = localStorage.getItem('token') || '';
-
-    loginService.logout(session, token).subscribe({
-      next: () => {
-        this.clearSession();
-        this.router.navigate(['/login']); // Redirection après déconnexion réussie
-      },
-      error: () => {
-        this.clearSession();
-        this.router.navigate(['/login']);
-      }
-    });
+  constructor(private router: Router, private keycloak: KeycloakService) {
+    // Use Keycloak logout and clear local session keys
+    this.keycloak.logout();
+    this.clearSession();
+    this.router.navigate(['/login']);
   }
 
   private clearSession() {

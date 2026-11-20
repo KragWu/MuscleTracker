@@ -216,6 +216,17 @@ Thumbs.db
 */playwright/.cache/
 */playwright/.auth/
 
-# Wiremock
-wiremock-config/__files
-*/wiremock-standalone*.jar
+# Kotlin / Gradle (backend)
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+*.class
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Supabase CLI (local stack)
+supabase/.temp/
+supabase/.branches/

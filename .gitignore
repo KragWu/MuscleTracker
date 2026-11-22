@@ -226,6 +226,7 @@ build/
 .env
 .env.*
 !.env.example
+local-data
 
 # Supabase CLI (local stack)
 supabase/.temp/

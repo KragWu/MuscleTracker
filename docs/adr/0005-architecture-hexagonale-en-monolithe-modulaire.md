@@ -1,6 +1,6 @@
 # ADR-0005 : Architecture hexagonale en monolithe modulaire
 
-- **Statut** : Acceptée
+- **Statut** : Acceptée (la liste des modules est précisée par l'[ADR-0011](0011-modules-et-vocabulaire-metier.md))
 - **Date** : 2026-11-20
 
 ## Contexte

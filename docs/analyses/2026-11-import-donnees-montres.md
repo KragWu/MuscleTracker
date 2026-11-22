@@ -63,6 +63,42 @@ Non couvertes : Samsung, Huawei, Amazfit.
 4. **Minimisation** : l'import ne retient qu'un sous-ensemble (résumé, tours, fréquence cardiaque) ; le **tracé** n'est conservé que si l'utilisateur le souhaite, avec export et suppression.
 5. Intégration directe avec l'API de Suunto : à étudier plus tard (un communiqué de 2019 mentionne un accès sur demande ; conditions actuelles non vérifiées).
 
+## Import technique : pistes (non décidé)
+
+L'ADR de l'epic « endurance » tranchera. Le décodeur FIT est un **adaptateur** derrière un port d'analyse de fichier : on peut en changer sans toucher au domaine.
+
+**Briques disponibles**
+
+| Brique | État |
+|---|---|
+| Choix d'un fichier dans la PWA | Champ fichier standard du navigateur |
+| Lecture du FIT côté serveur | SDK Java de Garmin sur Maven Central (`com.garmin:fit`) |
+| Lecture du FIT côté PWA | SDK JavaScript de Garmin (`@garmin/fitsdk`), utilisable dans un navigateur ; pas de CDN, à intégrer à la construction |
+| Futur client Flutter | Aucun SDK Dart confirmé |
+| Licence | Le SDK **n'est pas open source** (licence propre à Garmin) ; conditions de redistribution peu claires : **à lire avant adoption** |
+
+**Deux architectures**
+
+- **A. Lecture dans le back-end** : la PWA envoie le fichier ; le serveur le décode **en mémoire**, renvoie un **aperçu** (sport, date, distance, durée, tours) ; l'utilisateur confirme et choisit de garder ou non le tracé ; le serveur conserve le sous-ensemble retenu et jette le fichier. Un seul décodeur pour la PWA et Flutter, validation centralisée ; en contrepartie, le tracé transite par le serveur.
+- **B. Lecture dans la PWA** : le navigateur décode et n'envoie que des données structurées. Le tracé reste sur le téléphone sauf choix contraire, et cela fonctionne hors ligne ; mais le serveur doit quand même valider, et un second décodeur serait nécessaire pour Flutter.
+
+**Orientation** : A en premier (simplicité, centralisation), B comme optimisation de confidentialité plus tard. Arbitrage à confirmer dans l'ADR.
+
+**Points de vigilance**
+- Fichier non fiable : taille maximale, délai maximal, mémoire bornée, aucun stockage du fichier brut.
+- L'« export original » de Garmin peut être un ZIP ou un `.fit.gz` : ouverture avec des limites contre les archives piégées.
+- Doublons : importer deux fois le même fichier ne doit pas créer deux séances (empreinte : sport, début, durée, distance).
+- Suivi des mises à jour de la bibliothèque (Dependabot).
+- Réception d'un fichier partagé depuis l'application de la montre (partage vers une PWA) : non vérifié.
+
+## Fichiers de test : synthétiques plutôt qu'anonymisés
+
+Anonymiser un vrai fichier est fragile : la **forme** du tracé et la **courbe de fréquence cardiaque** restent reconnaissables même après décalage ; un FIT est binaire avec somme de contrôle, donc à réécrire avec un encodeur (la bibliothèque Python utilisée pour l'analyse ne sait que lire) ; des champs personnalisés de la montre (ressenti, temps de récupération, effort de pointe, VO2max estimée) sont des données de santé.
+
+**Orientation** : un **générateur de séances d'endurance synthétiques** dans les tests du back-end (quelques minutes, trois tours, tracé fictif en boucle près d'un lieu imaginaire, date fictive, valeurs plausibles), plus quelques fichiers **volontairement invalides** (tronqué, somme de contrôle fausse, démesuré). Des vrais fichiers, on ne garde que la **structure** documentée ci-dessus. Cela fera partie de la première issue de l'epic « endurance ».
+
+**À obtenir avant l'ADR** : lecture de la licence du SDK ; un fichier de **natation** et un fichier de **vélo avec capteur** de puissance ou de cadence, pour valider les champs.
+
 ## Sources
 
 - [Suunto : types de fichiers exportables](https://www.suunto.com/Support/faq-articles/suunto-app/what-type-of-files-can-i-export-from-the-suunto-app/)
@@ -76,3 +112,9 @@ Non couvertes : Samsung, Huawei, Amazfit.
 - [Coros : guide d'export (Gneta)](https://www.gneta.app/blog/export-coros-data-guide)
 - [Fitbit : exporter des séances en TCX](https://support.google.com/fitbit/answer/14236615)
 - [Google Health API : export TCX](https://developers.google.com/health/reference/rest/v4/users.dataTypes.dataPoints/exportExerciseTcx)
+- [Le SDK Java FIT sur Maven Central (forum Garmin)](https://forums.garmin.com/developer/fit-sdk/b/news-announcements/posts/the-fit-java-sdk-is-now-available-from-maven-central)
+- [Artefact `com.garmin:fit` (Maven Central)](https://central.sonatype.com/artifact/com.garmin/fit)
+- [Mises à jour de la licence du SDK FIT (forum Garmin)](https://forums.garmin.com/developer/fit-sdk/b/news-announcements/posts/fit-sdk-license-agreement-updates)
+- [Téléchargement du SDK FIT (Garmin)](https://developer.garmin.com/fit/download)
+- [`@garmin/fitsdk` (npm)](https://npmjs.com/package/%40garmin%2Ffitsdk)
+- [SDK JavaScript sans Node.js (forum Garmin)](https://forums.garmin.com/developer/fit-sdk/f/discussion/359510/javascript-sdk-without-node-js-npm)

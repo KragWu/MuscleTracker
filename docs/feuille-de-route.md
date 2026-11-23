@@ -23,7 +23,8 @@
 | Programme multidisciplinaire | Mélanger musculation et endurance dans un programme | idem |
 | Analyses et progression | Graphiques de tendance ; fenêtre d'analyse paramétrable | [Modèle économique](analyses/2026-11-modele-economique.md) |
 | Fonctionnement hors ligne | Saisie de séance sans réseau, puis synchronisation | ADR à rédiger |
-| Client Flutter | Enregistrement GPS en direct, meilleur hors ligne | [ADR-0002](adr/0002-pwa-puis-client-flutter.md) |
+| Supersets et minuteur | Blocs d'exercices enchaînés, minuteur de travail et de repos avec bips : PWA au mieux (écran allumé), bips écran verrouillé avec Flutter | [Supersets et minuteur](analyses/2026-11-supersets-et-minuteur.md) |
+| Client Flutter | Enregistrement GPS en direct, bips de minuteur écran verrouillé, meilleur hors ligne | [ADR-0002](adr/0002-pwa-puis-client-flutter.md) |
 | Interface d'administration | Saisie des exercices sans passer par les fichiers | Après le catalogue de départ |
 | Modèle économique | Offre gratuite et payante, **à décider avec de vrais usages** | [Modèle économique](analyses/2026-11-modele-economique.md) |
 

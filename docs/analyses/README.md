@@ -15,6 +15,7 @@ Quand une note débouche sur une décision, l'ADR correspondant la cite.
 | [Modèle économique](2026-11-modele-economique.md) | Limite d'analyse, offres des concurrents, pistes | 2026-11-22 |
 | [Import des données de montres](2026-11-import-donnees-montres.md) | FIT contre JSON (course, vélo), export par marque | 2026-11-22 |
 | [Programme multidisciplinaire](2026-11-programme-multidisciplinaire.md) | Programme mêlant musculation et endurance | 2026-11-22 |
+| [Supersets et minuteur](2026-11-supersets-et-minuteur.md) | Blocs d'exercices, minuteur avec bips, limites de la PWA | 2026-11-23 |
 
 ## Règle sur les données personnelles
 

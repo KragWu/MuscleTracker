@@ -39,6 +39,17 @@
 
 > **Note de code.** `Set` désignerait la collection du langage ; on écrit `WorkoutSet`. `Session` désignerait la connexion : on écrit `Workout`.
 
+## Bloc d'exercices (après le MVP, concept réservé)
+
+| Terme | Code | Définition | Périmètre |
+|---|---|---|---|
+| **Bloc** | `ExerciseBlock` | Regroupement d'exercices d'une séance qui s'enchaînent sans repos entre eux ; le repos vient après le bloc. | Après MVP, réservé |
+| **Superset** | `Superset` | Bloc de **deux** exercices (terme d'usage ; au-delà, on parle de bloc ou de série géante). | Après MVP, réservé |
+| **Tour de bloc** | `Round` | Un passage complet dans le bloc : une série de chaque exercice. **À ne pas confondre** avec le tour (`Lap`) d'une séance d'endurance. | Après MVP, réservé |
+| **Temps de travail / de repos** | `workDuration`, `restDuration` | Durées facultatives d'un bloc, qui pourront alimenter un **minuteur** avec bips. | Après MVP, réservé |
+
+> **Note.** Le concept est seulement **réservé** : un exercice de séance pourra appartenir à un bloc facultatif, sans rupture des données. Rien n'est implémenté avant le lot dédié.
+
 ## Séance d'endurance (après le MVP)
 
 | Terme | Code | Définition | Périmètre |

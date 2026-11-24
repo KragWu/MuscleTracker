@@ -9,10 +9,10 @@
 | `v0.1.0 - Fondations` | Squelettes back-end et PWA, contrat OpenAPI, pile locale, intégration continue, contrôles locaux | [Lot 1](backlog/lot-01-fondations.md) |
 | `v0.2.0 - Bibliothèque d'exercices` | Catalogue prédéfini, consultation, filtres, traductions | [Lot 2](backlog/lot-02-bibliotheque-d-exercices.md) |
 | `v0.3.0 - Identité utilisateur` | Connexion, utilisateur interne, profil, protection de l'API et du catalogue | [Lot 3](backlog/lot-03-gestion-utilisateur.md) |
-| `v0.4.0 - Préparer une séance` | Créer une séance, choisir les exercices avec leurs **cibles** (séries, répétitions, charge), dupliquer | Lot 4 à réécrire |
-| `v0.5.0 - Suivi de séance` | Saisir les séries réalisées, afficher les **dernières valeurs connues** | À rédiger |
-| `v0.6.0 - Historique` | Consulter les séances passées | À rédiger |
-| `v1.0.0 - MVP` | Export et suppression de compte, politique de confidentialité définitive, déploiement | À rédiger |
+| `v0.4.0 - Préparer une séance` | Créer une séance, choisir les exercices avec leurs **cibles** (séries, répétitions, charge), dupliquer | [Lot 4](backlog/lot-04-preparer-une-seance.md) |
+| `v0.5.0 - Suivi de séance` | Saisir les séries réalisées, afficher les **dernières valeurs connues** | [Lot 5](backlog/lot-05-suivre-une-seance.md) |
+| `v0.6.0 - Historique` | Consulter les séances passées | [Lot 6](backlog/lot-06-historique.md) |
+| `v1.0.0 - MVP` | Export et suppression de compte, politique de confidentialité définitive, déploiement | [Lot 7](backlog/lot-07-droits-et-mise-en-production.md) |
 
 ## Après le MVP (sans ordre figé)
 

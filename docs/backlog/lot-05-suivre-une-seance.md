@@ -96,6 +96,7 @@ Dépendances externes : #68 (back-end), #69 (PWA), #70 (contrat OpenAPI), #85 (l
 - *Given* l'ADR publié, *When* je le lis, *Then* je peux écrire le domaine de T2 sans autre question.
 - *Given* une série rejouée avec le même identifiant, *Then* l'ADR précise que le résultat est identique et par quel mécanisme.
 - *Given* un exercice désactivé, *Then* l'ADR précise le comportement dans une séance en cours.
+- *Given* une séance en cours sans aucune série réalisée, *Then* l'ADR précise que sa fin est refusée et que l'utilisateur doit l'abandonner (sans série, il n'y a pas de séance).
 
 **Hors périmètre.** Code, chronomètre, RPE.
 
@@ -122,6 +123,7 @@ Dépendances externes : #68 (back-end), #69 (PWA), #70 (contrat OpenAPI), #85 (l
 - *Given* une séance terminée, *When* j'y ajoute une série, *Then* l'ajout est refusé.
 - *Given* un exercice jamais réalisé, *Then* ses dernières valeurs connues sont vides.
 - Un test ArchUnit confirme que le domaine reste indépendant du cadre.
+- *Given* une séance en cours sans aucune série, *When* je la termine, *Then* la fin est refusée avec un message explicite ; *When* je l'abandonne, *Then* l'abandon est accepté.
 
 **Hors périmètre.** Persistance, API.
 
@@ -223,6 +225,7 @@ Dépendances externes : #68 (back-end), #69 (PWA), #70 (contrat OpenAPI), #85 (l
 - *Given* un ressenti et une note, *When* je termine, *Then* ils sont enregistrés avec la séance.
 - *Given* une note de plus de 500 caractères, *Then* un message l'indique avant l'envoi.
 - *Given* l'abandon, *When* je confirme, *Then* la séance en cours est traitée selon la règle de T1.
+- *Given* une séance en cours sans aucune série, *When* je tente de la terminer, *Then* un message m'indique que je dois enregistrer une série ou abandonner la séance.
 
 **Dépendances.** T5.
 
